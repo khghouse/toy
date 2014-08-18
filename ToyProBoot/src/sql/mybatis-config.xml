@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- 
+		mybatis-config.xml
+		
+		- 기타 세팅
+		- Alias
+		- 매핑
+ -->
+ 
+ <configuration>
+ 	<settings>
+ 		<setting name="callSettersOnNulls" value="false"/>
+ 	</settings>
+ 	
+ 	<typeAliases>
+ 		<typeAlias alias="toy" type="spring.domain.Toy"/>
+ 		<typeAlias alias="search" type="spring.domain.Search"/>
+ 		<typeAlias alias="category" type="spring.domain.Category"/>
+ 		<typeAlias alias="rentalShop" type="spring.domain.RentalShop"/>
+ 		<typeAlias alias="gu" type="spring.domain.Gu"/>
+ 		<typeAlias alias="guroToy" type="spring.domain.guro.GuroToy"/>
+ 		<typeAlias alias="guroRentalShop" type="spring.domain.guro.GuroRentalShop"/>
+ 		<!-- <typeAlias alias="notice" type="spring.domain.Notice"/>
+ 		<typeAlias alias="wish" type="spring.domain.Wish"/> -->
+ 		<!-- <typeAlias alias="donate" type="spring.domain.Donate"/> -->
+ 	</typeAliases>
+ 	
+ 	<mappers>
+ 		<mapper resource="sql/ToyProductMapper.xml"/>
+ 		<mapper resource="sql/ContactMapper.xml"/>
+ 		<mapper resource="sql/ParseMapper.xml"/>
+ 	</mappers>
+ </configuration>
