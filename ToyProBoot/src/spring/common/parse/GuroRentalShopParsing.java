@@ -32,7 +32,7 @@ public class GuroRentalShopParsing
 		
 		List<GuroRentalShop> guroRentalShopList = new ArrayList<GuroRentalShop>();
 		
-		workbook = new HSSFWorkbook(new FileInputStream(new File("C:\\workspace_project\\ToyProBoot140811\\rentalShop.xls")));
+		workbook = new HSSFWorkbook(new FileInputStream(new File("C:\\workspace\\ToyProBoot\\rentalShop.xls")));
 		
 		if(workbook != null)
 		{
