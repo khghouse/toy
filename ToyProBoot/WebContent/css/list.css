@@ -79,11 +79,20 @@
 	position:fixed;
 	top:50%;
 	left:15%;
-	font-size: 1.7em;
+	font-size: 1.3em;
 	color:#ffffff;
 	font-family:'Nanum Gothic';
 	z-index:40;
 	text-align: center;
+}
+.popupbtn{
+	width:100%;
+	position:fixed;
+	top:80%;
+	left:60%;
+	font-family:'Nanum Gothic';
+	z-index:40;
+	text-align: left;
 }
 .popupname{top:40%;}
 .popuprentalstate{top:45%;}
@@ -105,7 +114,7 @@
 		height:55%;
 	}
 	.popupname,.popuprentalstate,.popupuseage,.popupbusiness,.popupregion,.popupgetdate,.popupmadedate{
-		font-size: 0.7em;
+		font-size: 0.6em;
 		left:0%;
 	}
 	.popupname{top:63%;}
@@ -124,6 +133,10 @@
 		top:75%;
 		left:57%;
 		background: url(../images/girl-gray-60.png) no-repeat ;
+	}
+	.popupbtn{
+		top:83%;
+		left:45%;
 	}
 }
 @media only screen and (min-width: 320px) {
@@ -156,6 +169,10 @@
 		left:57%;
 		background: url(../images/girl-gray-70.png) no-repeat ;
 	}
+	.popupbtn{
+		top:82%;
+		left:53%;
+	}
 }
 @media only screen and (min-width: 486px) {
 	.superbox-list {
@@ -173,7 +190,7 @@
 		margin:3% 0 0 3%;
 	}
 	.popupname,.popuprentalstate,.popupuseage,.popupbusiness,.popupregion,.popupgetdate,.popupmadedate{
-		font-size: 1em;
+		font-size: 0.9em;
 		left:0%;
 	}
 	.outline{
@@ -192,6 +209,10 @@
 		top:70%;
 		left:55%;
 		background: url(../images/girl-gray.png) no-repeat ;
+	}
+	.popupbtn{
+		top:81%;
+		left:58%;
 	}
 }
 @media only screen and (min-width: 691px) {
@@ -214,6 +235,10 @@
 		top:70%;
 		left:53%;
 	}
+	.popupbtn{
+		top:83%;
+		left:56%;
+	}
 @media only screen and (min-width: 768px) {
 	.superbox-list {
 		/* width:16.66666667%; */
@@ -232,7 +257,7 @@
 		padding-right: 2.5%;
 	}
 	.popupname,.popuprentalstate,.popupuseage,.popupbusiness,.popupregion,.popupgetdate,.popupmadedate{
-		font-size: 1.3em;
+		font-size: 0.9em;
 		left:15%;
 	}
 	.popupname{top:40%;}
@@ -252,6 +277,10 @@
 		top:60%;
 		left:69%;
 	}
+	.popupbtn{
+		top:69%;
+		left:72%;
+	}
 }
 @media only screen and (min-width: 1025px) {
 	.superbox-list {
@@ -270,7 +299,7 @@
 		padding:0;
 	}
 	.popupname,.popuprentalstate,.popupuseage,.popupbusiness,.popupregion,.popupgetdate,.popupmadedate{
-		font-size: 1.5em;
+		font-size: 1.2em;
 		left:15%;
 	}
 	.popupname{top:40%;}
@@ -289,8 +318,10 @@
 	.popupimage{
 		top:60%;
 		left:70%;
-/* 		width:50%;
-		height:50%; */
+	}
+	.popupbtn{
+		top:69%;
+		left:73%;
 	}
 }
 

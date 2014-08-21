@@ -217,9 +217,17 @@
 		var popupregion=$('<div class="popupregion">abcdabcd</div>');
 		var popupmadedate=$('<div class="popupmadedate">abcdabcd</div>');
 		var popupimage = $('<div class="popupimage"></div>');
+		var popupbtn = $('<div class="popupbtn"><button class="btn btn-default btn-sm">예약하기</div>');
+		
+		
 		superbox.append(superboximg).append(outline).append(popupname).append(popuprentalstate)
 		.append(popupuseage).append(popupbusiness).append(popupregion).append(popupmadedate);
 		superbox.append(popupimage);
+		if(toyrentalState="대출가능"){
+			alert("대출가능 ??");
+			superbox.append(popupbtn);
+		}
+		
 		superbox.append(superboxclose);
 		superboximg.attr('src',imgsrc);
 		

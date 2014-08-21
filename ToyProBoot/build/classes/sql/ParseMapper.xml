@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+		ProductMapper.xml
+		
+		- Product Component의 Business Logic을 구현?
+ -->
+ 
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper파일 최상위 태그 -->		
+<mapper namespace="ParseMapper">
+	
+	<insert id="guroToyParsing" parameterType="guroToy">
+		INSERT
+		INTO toy_info(toy_code, rental_code, category_code, toy_name, business, region, made_date, get_date, use_age, rental_state, toy_img)
+		VALUES(	#{toyIdid:VARCHAR},
+							<if test="brchName == '구로꿈나무장난감나라'">12,</if>
+							<if test="brchName == '개봉장난감나라'">13,</if>
+							<choose>
+								<when test="subject == '600' || subject == '700'">600,</when>
+								<when test="subject == '800' || subject == '900'">700,</when>
+								<when test="subject == ''">800,</when>
+								<when test="subject == '0'">000,</when>
+								<otherwise>#{subject:VARCHAR},</otherwise>
+							</choose>
+							#{maintitle:VARCHAR},
+							#{fn:VARCHAR},
+							#{region:VARCHAR},
+							#{created:VARCHAR},
+							#{issued:VARCHAR},
+							#{age:VARCHAR},
+							#{codeDesc:VARCHAR},
+							#{toyImg:VARCHAR} )
+	</insert>
+	
+	<insert id="guroRentalShopParsing" parameterType="guroRentalShop">
+		INSERT
+		INTO rental_shop(rental_code, gu_code, rental_name, addr, tel, use_hours, rental_term, rental_cnt, toy_cnt, close_day, website, latitude, longitude)
+		VALUES(	(SELECT NVL(MAX(rental_code)+1, 1) FROM rental_shop),
+					#{guCode.guCode:NUMERIC},
+					#{rentalName:VARCHAR},
+					#{addr:VARCHAR},
+					#{tel:VARCHAR},
+					#{useHours:VARCHAR},
+					#{rentalTerm:VARCHAR},
+					#{rentalCnt:VARCHAR},
+					#{toyCnt:VARCHAR},
+					#{closeDay:VARCHAR},
+					#{website:VARCHAR},
+					#{latitude:VARCHAR},
+					#{longitude:VARCHAR} )
+	</insert>
+	
+	<select id="getGuCode" parameterType="String" resultType="int">
+		SELECT gu_code
+		FROM gu_info
+		WHERE gu_name = #{value}
+	</select>
+</mapper>
+	

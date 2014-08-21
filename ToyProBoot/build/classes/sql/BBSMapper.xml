@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="BBSMapper">
+	
+	<resultMap type="bbs" id="bbsSelectMap">
+		<result property="code" column="code" jdbcType="NUMERIC"/>
+		<result property="subject" column="subject" jdbcType="VARCHAR"/>
+		<result property="writer" column="writer" jdbcType="VARCHAR"/>
+		<result property="regDate" column="reg_date" jdbcType="VARCHAR"/>
+		<result property="count" column="count" jdbcType="NUMERIC"/>
+		<result property="attachment" column="attachment" jdbcType="VARCHAR"/>
+		<result property="content" column="content" jdbcType="VARCHAR"/>
+		<result property="groupId" column="group_id" jdbcType="NUMERIC"/>
+		<result property="groupStep" column="group_step" jdbcType="NUMERIC"/>
+		<result property="groupTab" column="group_tab" jdbcType="NUMERIC"/>
+		<result property="root" column="root" jdbcType="NUMERIC"/>
+		<result property="depth" column="depth" jdbcType="NUMERIC"/>
+	</resultMap>
+	
+	<sql id="sqlBBSList">
+		SELECT code, subject, writer, reg_date, count, attachment, group_tab
+		FROM bbs
+		<if test="searchKeyword != ''">
+		<if test="searchKeyword !='null'">
+         <trim prefix="WHERE" >
+            <if test="bbsCondition == 0">
+               subject LIKE '%${searchKeyword}%' 
+            </if>
+            <if test="bbsCondition == 1">
+               writer LIKE '%${searchKeyword}%'
+            </if>
+            <if test="bbsCondition == 2">
+               content LIKE '%${searchKeyword}%'
+            </if>
+         </trim>
+         </if>
+      </if>
+		ORDER BY group_id DESC, group_step ASC
+	</sql>
+	
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM (<include refid="sqlBBSList"/>) countTable
+	</select>
+	
+	<select id="getBBSList" parameterType="search" resultMap="bbsSelectMap">
+		SELECT code, subject, writer, reg_date, count, attachment, group_tab
+		FROM (SELECT code, subject, writer, reg_date, count, attachment, group_tab, ROWNUM AS row_seq
+				FROM(<include refid="sqlBBSList"/>)
+				WHERE ROWNUM &lt;= ${currentPage * pageSize} )
+		WHERE row_seq BETWEEN ${(currentPage - 1) * pageSize + 1} AND ${currentPage * pageSize}
+		
+	</select>
+	
+	<insert id="addBBSContent" parameterType="bbs">
+		INSERT
+		INTO bbs
+		VALUES( (SELECT NVL(MAX(code)+1, 1) FROM bbs),
+					#{subject:VARCHAR},
+					SYSDATE,
+					0,
+					#{writer:VARCHAR},
+					#{content:VARCHAR},
+					#{attachment:VARCHAR},
+					(SELECT NVL(MAX(group_id)+1, 1) FROM bbs),
+					0,
+					0,
+					0,
+					0
+					)
+	</insert>
+	
+	<select id="getBBSContent" parameterType="int" resultMap="bbsSelectMap">
+		SELECT code, subject, reg_date, count, writer, content, attachment, group_id, group_step, group_tab, root, depth
+		FROM bbs
+		WHERE code = #{value} 
+	</select>
+	
+	<update id="updateCount" parameterType="int">
+		UPDATE bbs 
+		SET count=count+1
+		WHERE code = #{value}
+	</update>
+	
+	
+	<update id="updateDepth" parameterType="bbs">
+		UPDATE bbs
+		SET depth = depth + 1
+		WHERE code = #{value}
+	</update>
+	
+	 <insert id="addBBSReContent" parameterType="bbs">
+		INSERT
+		INTO bbs
+		VALUES( (SELECT NVL(MAX(code)+1, 1) FROM bbs),
+					#{subject:VARCHAR},
+					SYSDATE,
+					0,
+					#{writer:VARCHAR},
+					#{content:VARCHAR},
+					#{attachment:VARCHAR},
+					#{groupId:NUMERIC},
+					#{groupStep:NUMERIC}+1,
+					#{groupTab:NUMERIC}+1,
+					#{root:NUMERIC},
+					0
+					)
+	</insert>
+	
+	<select id="getMaxCode" resultType="int">
+		SELECT MAX(code)
+		FROM bbs
+	</select>
+	
+	<!-- UPDATE freeBoard SET group_step=group_step+1 "
+				+"WHERE group_id=? AND group_step>? -->
+				
+	<update id="updateSeq" parameterType="bbs">
+		UPDATE bbs SET group_step=group_step+1
+		WHERE group_id=#{groupId} AND group_step>#{groupStep}
+	</update>
+	
+	<delete id="deleteBBSContent" parameterType="int">
+		DELETE FROM bbs 
+		WHERE code=#{code} 
+	</delete>
+
+	<update id="updateSubject" parameterType="int">
+		UPDATE bbs SET subject='관리자 또는 작성자에 의해 삭제 되었습니다.'
+		WHERE code=#{code} 
+	</update>
+	
+	<update id="updateBBSContent" parameterType="bbs">
+		UPDATE bbs SET subject=#{subject}, content=#{content}, attachment=#{attachment}
+		WHERE code=#{code}
+	</update>
+	
+		
+</mapper>

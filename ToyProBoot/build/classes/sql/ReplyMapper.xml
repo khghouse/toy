@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="ReplyMapper">
+	
+	<resultMap type="reply" id="replySelectMap">
+		<result property="replyCode" column="reply_code" jdbcType="NUMERIC"/>
+		<result property="code.code" column="code" jdbcType="NUMERIC"/>
+		<result property="replyContent" column="reply_content" jdbcType="VARCHAR"/>
+		<result property="regDate" column="reg_date" jdbcType="VARCHAR"/>
+		<result property="replyWriter" column="reply_writer" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	
+	<insert id="addReply" parameterType="reply">
+		INSERT
+		INTO reply
+		VALUES( (SELECT NVL(MAX(reply_code)+1, 1) FROM reply),
+					#{code.code:VARCHAR},
+					#{replyContent:VARCHAR},
+					SYSDATE,
+					#{replyWriter:VARCHAR}
+					)
+	</insert>
+	
+	<select id="getReply" parameterType="int" resultMap="replySelectMap">
+		SELECT reply_code, code, reply_content, reg_date, reply_writer
+		FROM reply
+		WHERE code = #{value} 
+		ORDER BY reply_code DESC
+	</select>
+	
+	<!-- <select id="getMaxCode" resultType="int">
+		SELECT MAX(reply_code)
+		FROM reply
+	</select> -->
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM reply 
+		WHERE reply_code=#{value} 
+	</delete>
+
+	<update id="updateReply" parameterType="reply">
+		UPDATE reply SET  reply_content=#{replyContent}
+		WHERE reply_code=#{replyCode}
+	</update>
+		
+</mapper>
