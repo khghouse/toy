@@ -8,6 +8,7 @@ function ajaxConnect() {
 	           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         },
 		success:function(msg){
+			alert(msg);
 			bbsList(msg);
 		}
 	});
@@ -17,6 +18,7 @@ function fncBbsCondition() {
 	
 	var url="/app/bbs/bbsList/";
 	url=conditionPage(url)+"/1";
+	alert("현재 url : "+url);
 	
 	$.ajax({
 		type: "POST",
@@ -26,6 +28,7 @@ function fncBbsCondition() {
 	           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         },
 		success:function(msg){
+			alert(msg);
 			bbsList(msg);
 		}
 	});
@@ -33,8 +36,12 @@ function fncBbsCondition() {
 }
 
 function conditionPage(strPage){
+	alert("조건검색")
 	var bbsCondition=$("#bbsConditionId").val();
 	var bbsKeyword=$("#bbsKeyword").val();
+	
+	alert("조건: "+bbsCondition);
+	alert("검색: "+bbsKeyword);
 	
 	if(bbsCondition!=null){
 		strPage+="/"+bbsCondition;
@@ -50,6 +57,7 @@ function conditionPage(strPage){
 
 //list data 뿌려주기
 function bbsList(msg) {
+	("조건성공했어??")
 	//json 객체를 자바스크립트 객체로 변환
 	var listData = eval("("+msg+")");
 	$(".table tbody").empty();
@@ -110,6 +118,7 @@ function bbsList(msg) {
 
 //pageNavigation
 function pageNavigation(resultPage){
+	alert("pagenavi탔나");
 	var append;
 	$(".pagination").empty();
 	if(resultPage.currentPage <= resultPage.pageUnit){
@@ -138,9 +147,11 @@ function pageNavigation(resultPage){
 }
 
 function listPage(currentPage){
+	alert("listpage : "+currentPage);
 	
 	var url="/app/bbs/bbsList";
 	url= conditionPage(url)+"/"+currentPage;
+	alert("url :"+url);
 	
     $.ajax({
         type: "POST",
@@ -149,6 +160,7 @@ function listPage(currentPage){
 	           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         },
         success: function(msg) {
+        	alert(msg);
         	bbsList(msg);
         }
     });

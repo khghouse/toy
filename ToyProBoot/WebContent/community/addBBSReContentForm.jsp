@@ -55,7 +55,7 @@
 		<input type="hidden" id="groupTab" value="${bbs.groupTab }"/>
 		<input type="hidden" id="code" value="${bbs.code }"/>
 	  
-	  <p align="center">
+	  <p align="right">
 	   <%-- <button  type="button" class="btn btn-primary btn-sm" onclick="changeContent('/app/bbs/addBBSReContent/${bbs.code }')">등록</button> --%>
 	   <a href="#"  class="btn btn-primary btn-sm" onclick="formAddRecontent();">등록</a>
 	   <a href="#"  class="btn btn-default btn-sm" onclick="changeContent('../community/bbs.jsp')">취소</a>

@@ -147,9 +147,16 @@ footer {
 /* bbsContent */
 #bbsReply{margin-top: 1%; margin-left: 10%;}
 #reply_lable{text-align: right;}
-#reply_textarea{width: 80%;border: 1px solid #ccc; border-radius: 4px;}
-#reply_btn{background-position: center;}
+#reply_textarea{width: 90%;border: 1px solid #ccc; border-radius: 4px; margin-top: 1%;}
+#bbs_textarea{width: 90%;border: 1px solid #ccc; border-radius: 4px; margin-top: 1%;}
+#reply_btn{margin-left: 84%; margin-top: 1%;}
 #reply_updateState{display: none;}
+#reply_a{margin-left:30%; font-size: 0.9em;}
+.reply_content{width: 87%;border: 1px solid #ccc; border-radius: 4px; margin-top: 1%; margin-left: 10%;}
+.reply_regdate{color: #BDBDBD; font-size: 0.9em;}
+.reply_writer{margin-left: 13%; font-size: 1.0em; font-weight: bold;}
+.reply_a{margin-left: 65%; font-size: 0.9em;}
+
 
 /* bbsList */
-#bbs_writer{border-radius: 3px;}
+#bbs_writer{border-radius: 3px;}us: 3px;}
