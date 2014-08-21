@@ -143,3 +143,13 @@ footer {
 	height: 400px;
 /* 	padding: 0 5%; */
 }
+
+/* bbsContent */
+#bbsReply{margin-top: 1%; margin-left: 10%;}
+#reply_lable{text-align: right;}
+#reply_textarea{width: 80%;border: 1px solid #ccc; border-radius: 4px;}
+#reply_btn{background-position: center;}
+#reply_updateState{display: none;}
+
+/* bbsList */
+#bbs_writer{border-radius: 3px;}
