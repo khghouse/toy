@@ -60,7 +60,7 @@
 	  <p align="right">
 	   <%-- <button  type="button" class="btn btn-primary btn-sm" onclick="changeContent('/app/bbs/addBBSContent')">등록</button> --%>
 	   <a href="#"  class="btn btn-primary btn-sm" onclick="formUpdate();">등록</a>
-	   <a href="#"  class="btn btn-default btn-sm" onclick="changeContent('../community/bbs.jsp')">취소</a>
+	   <a href="#"  class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/getBBSContentReply/${bbs.code}')">취소</a>
 	  </p>
 	</form>
 </div>
