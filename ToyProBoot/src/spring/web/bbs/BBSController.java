@@ -50,18 +50,13 @@ public class BBSController{
 	//@ResponseBody : ajax의 리턴 값을 넘겨줌
 	@RequestMapping(value="/bbsList/{bbsCondition}/{searchKeyword}/{currentPage}")
 	public @ResponseBody String getBBSListPage(@ModelAttribute Search search, @PathVariable String bbsCondition, @PathVariable String searchKeyword, @PathVariable Integer currentPage) throws Exception{
-		System.out.println("텍스트 검색 시 여기를 탔나요?");
 		return getList(search, bbsCondition, searchKeyword, currentPage);
 	}
 	
 	
 	public String getList(Search search, String bbsCondition, String searchKeyword, Integer currentPage) throws Exception{
-		System.out.println("컨트롤");
-		System.out.println("현재페이지"+currentPage);
 		if(currentPage == 0){
-			System.out.println("if문 안");
 			search.setCurrentPage(1);
-			System.out.println(search.getCurrentPage());
 		}else{
 			search.setCurrentPage(currentPage);
 		}
@@ -77,7 +72,6 @@ public class BBSController{
 		Map<String, Object> map = bbsService.getBBSList(search);
 		
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(search);
 		
 		Map<String, Object> bbsMap = new HashMap<String, Object>();
 		bbsMap.put("list", map.get("list"));
@@ -87,7 +81,6 @@ public class BBSController{
 		//json으로 바꿔주는 객체
 		ObjectMapper objMapper = new ObjectMapper();
 		String jsonList = objMapper.writeValueAsString(bbsMap);
-		System.out.println(jsonList);
 		return jsonList;
 	}
 	
@@ -110,8 +103,6 @@ public class BBSController{
 	
 	@RequestMapping(value="/addBBSReContent/{jsonValue}")
 	public @ResponseBody String addBBSReContent(@PathVariable String jsonValue) throws Exception{
-		System.out.println("컨트롤 타겠지");
-		
 		ObjectMapper objMapper = new ObjectMapper();
 		
 		BBS bbs  = objMapper.readValue(jsonValue, BBS.class);
@@ -169,7 +160,6 @@ public class BBSController{
 		System.out.println(jsonValue);*/
 	@RequestMapping(value="/updateBBSContent/{code}/{subject}/{writer}/{content}/{attachment}")
 	public @ResponseBody String updateBBSContent(@PathVariable int code, @PathVariable String subject, @PathVariable String writer, @PathVariable String content, @PathVariable String attachment) throws Exception{
-		System.out.println("update이다");
 		
 		BBS bbs = new BBS();
 		bbs.setCode(code);

@@ -26,14 +26,13 @@ public class ReplyController{
 	
 	@RequestMapping(value="/addReply/{bbsCode}/{replyContent}")
 	public @ResponseBody String addReply(@PathVariable int bbsCode, @PathVariable String replyContent) throws Exception{
-		System.out.println("댓글 컨트롤");
 		
 		Reply reply = new Reply();
 		BBS bbs = new BBS();
 		bbs.setCode(bbsCode);
 		reply.setCode(bbs);
 		reply.setReplyContent(replyContent);
-		reply.setReplyWriter("호걸이");
+		reply.setReplyWriter("관리자");
 		
 		replyService.insertReply(reply);
 		
@@ -42,7 +41,6 @@ public class ReplyController{
 	
 	@RequestMapping(value="/updateReply/{replyCode}/{replyContent}")
 	public @ResponseBody String updateReply(@PathVariable int replyCode, @PathVariable String replyContent) throws Exception{
-		System.out.println("update컨트롤");
 		Reply reply = new Reply();
 		reply.setReplyCode(replyCode);
 		reply.setReplyContent(replyContent);
@@ -53,7 +51,6 @@ public class ReplyController{
 
 	@RequestMapping(value="/deleteReply/{replyCode}")
 	public String deleteReply(@PathVariable int replyCode) throws Exception{
-		System.out.println("delete컨트롤");
 		replyService.deleteReply(replyCode);
 		
 		return "/community/bbsContent.jsp";
