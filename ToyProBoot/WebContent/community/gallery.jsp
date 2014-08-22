@@ -161,19 +161,16 @@ ul li img {
 			}
 		}
 	}
-	alert("1");
 	$(document)
 			.ready(
 					
 					
 					
 					function() {
-						alert("2");
 						$('#imgList li img')
 								.on(
 										'click',
 										function() {
-											alert("3");
 											var src = $(this).attr('src');
 											var img = '<img src="' + src + '" class="img-responsive"/>';
 
