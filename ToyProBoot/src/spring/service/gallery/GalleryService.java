@@ -1,5 +1,7 @@
 package spring.service.gallery;
 
-public interface GalleryService {
+import java.util.List;
 
+public interface GalleryService {
+	public List<String> getImgList() throws Exception;
 }

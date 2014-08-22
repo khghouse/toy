@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+		ProductMapper.xml
+		
+		- Product Component의 Business Logic을 구현?
+ -->
+ 
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper파일 최상위 태그 -->		
+<mapper namespace="GalleryMapper">
+	
+
+	
+	<select  id="getImgList"  resultType="string">
+	  	SELECT img_name
+	  	FROM gallery
+	  	order by img_no
+	 </select>
+	
+</mapper>
+	
