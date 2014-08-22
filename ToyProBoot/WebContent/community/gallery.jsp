@@ -89,6 +89,19 @@ ul li img {
 		</script>
 	</div>
 	<div class="container">
+		<!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Gallery
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Community</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
 	<!-- 	<div class="row"
 			style="text-align: center; border-bottom: 1px dashed #ccc; padding: 0 0 20px 0; margin-bottom: 40px;">
 			<h3 style="font-family: arial; font-weight: bold; font-size: 30px;">
