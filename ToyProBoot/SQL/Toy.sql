@@ -14,12 +14,24 @@ DROP TABLE category_info
 DROP TABLE gu_info 
 	CASCADE CONSTRAINTS;
 
-/* 지유게시판 */
+/* 자유게시판 */
 DROP TABLE bbs 
 	CASCADE CONSTRAINTS;
 
 /* 댓글 */
 DROP TABLE reply 
+	CASCADE CONSTRAINTS;
+
+/* 회원정보 */
+DROP TABLE user_info 
+	CASCADE CONSTRAINTS;
+
+/* 예약정보 */
+DROP TABLE reservation 
+	CASCADE CONSTRAINTS;
+
+/* 이미지정보 */
+DROP TABLE gallery 
 	CASCADE CONSTRAINTS;
 
 /* 장난감정보 */
@@ -118,13 +130,13 @@ ALTER TABLE gu_info
 			gu_code
 		);
 
-/* 지유게시판 */
+/* 자유게시판 */
 CREATE TABLE bbs (
 	code INTEGER NOT NULL, /* 게시글번호 */
+	user_id VARCHAR2(255), /* 아이디 */
 	subject VARCHAR2(255) NOT NULL, /* 제목 */
 	reg_date VARCHAR2(50) NOT NULL, /* 등록일 */
 	count INTEGER DEFAULT 0 NOT NULL, /* 조회수 */
-	writer VARCHAR2(50) NOT NULL, /* 작성자 */
 	content CLOB NOT NULL, /* 글내용 */
 	attachment VARCHAR2(50), /* 첨부파일 */
 	group_id INTEGER NOT NULL, /* 그룹게시글번호 */
@@ -150,9 +162,9 @@ ALTER TABLE bbs
 CREATE TABLE reply (
 	reply_code INTEGER NOT NULL, /* 댓글번호 */
 	code INTEGER NOT NULL, /* 게시글번호 */
+	user_id VARCHAR2(255), /* 아이디 */
 	reply_content CLOB NOT NULL, /* 글내용 */
-	reg_date VARCHAR2(50) NOT NULL, /* 등록일 */
-	reply_writer VARCHAR2(50) NOT NULL /* 작성자 */
+	reg_date VARCHAR2(50) NOT NULL /* 등록일 */
 );
 
 CREATE UNIQUE INDEX PK_reply
@@ -166,6 +178,59 @@ ALTER TABLE reply
 		PRIMARY KEY (
 			reply_code
 		);
+
+/* 회원정보 */
+CREATE TABLE user_info (
+	user_id VARCHAR2(255) NOT NULL, /* 아이디 */
+	user_pw VARCHAR2(255) NOT NULL, /* 비밀번호 */
+	user_name VARCHAR2(50) NOT NULL, /* 이름 */
+	tel VARCHAR2(30) NOT NULL, /* 전화번호 */
+	email VARCHAR2(40), /* 이메일 */
+	email_receive INTEGER, /* 이메일수신 */
+	addr VARCHAR2(255), /* 주소 */
+	reg_date DATE /* 가입일 */
+);
+
+CREATE UNIQUE INDEX PK_user_info
+	ON user_info (
+		user_id ASC
+	);
+
+ALTER TABLE user_info
+	ADD
+		CONSTRAINT PK_user_info
+		PRIMARY KEY (
+			user_id
+		);
+
+/* 예약정보 */
+CREATE TABLE reservation (
+	reservation INTEGER NOT NULL, /* 예약번호 */
+	user_id VARCHAR2(255), /* 아이디 */
+	toy_code VARCHAR2(20), /* 장난감번호 */
+	rental_code INTEGER, /* 대여점번호 */
+	reg_date DATE DEFAULT SYSDATE NOT NULL, /* 예약일시 */
+	rental_date DATE, /* 대출예약일 */
+	return_date DATE /* 반납예정일 */
+);
+
+CREATE UNIQUE INDEX PK_reservation
+	ON reservation (
+		reservation ASC
+	);
+
+ALTER TABLE reservation
+	ADD
+		CONSTRAINT PK_reservation
+		PRIMARY KEY (
+			reservation
+		);
+
+/* 이미지정보 */
+CREATE TABLE gallery (
+	img_no INTEGER, /* 이미지번호 */
+	img_name VARCHAR2(50) /* 이미지파일명 */
+);
 
 ALTER TABLE toy_info
 	ADD
@@ -197,6 +262,16 @@ ALTER TABLE rental_shop
 			gu_code
 		);
 
+ALTER TABLE bbs
+	ADD
+		CONSTRAINT FK_user_info_TO_bbs
+		FOREIGN KEY (
+			user_id
+		)
+		REFERENCES user_info (
+			user_id
+		);
+
 ALTER TABLE reply
 	ADD
 		CONSTRAINT FK_bbs_TO_reply
@@ -206,7 +281,39 @@ ALTER TABLE reply
 		REFERENCES bbs (
 			code
 		);
-		
+
+ALTER TABLE reply
+	ADD
+		CONSTRAINT FK_user_info_TO_reply
+		FOREIGN KEY (
+			user_id
+		)
+		REFERENCES user_info (
+			user_id
+		);
+
+ALTER TABLE reservation
+	ADD
+		CONSTRAINT FK_user_info_TO_reservation
+		FOREIGN KEY (
+			user_id
+		)
+		REFERENCES user_info (
+			user_id
+		);
+
+ALTER TABLE reservation
+	ADD
+		CONSTRAINT FK_toy_info_TO_reservation
+		FOREIGN KEY (
+			toy_code,
+			rental_code
+		)
+		REFERENCES toy_info (
+			toy_code,
+			rental_code
+		);
+
 commit;
 
 -- 구 정보 insert
@@ -285,6 +392,7 @@ insert into category_info values('800', '기타');
 commit;
 
 -- 지점 정보 insert - 지점코드(rental_code), 구 코드(gu_code), 지점명(rental_name)
+/*
 insert into rental_shop(rental_code, gu_code, rental_name) values(1, 1, '강남구육아종합지원센터(개포점)');
 
 insert into rental_shop(rental_code, gu_code, rental_name) values((SELECT NVL(MAX(rental_code)+1, 1) FROM rental_shop), 1, '강남구육아종합지원센터(논현점)');
@@ -366,24 +474,44 @@ insert into rental_shop(rental_code, gu_code, rental_name) values((SELECT NVL(MA
 insert into rental_shop(rental_code, gu_code, rental_name) values((SELECT NVL(MAX(rental_code)+1, 1) FROM rental_shop), 25, '장난감대여센터(중랑점)');
 
 insert into rental_shop(rental_code, gu_code, rental_name) values((SELECT NVL(MAX(rental_code)+1, 1) FROM rental_shop), 25, '장난감대여센터(면목점)');
+*/
+
+--user insert
+INSERT INTO user_info
+VALUES('user01','user01','유저01','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+INSERT INTO user_info
+VALUES('user02','user02','유저02','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+INSERT INTO user_info
+VALUES('user03','user03','유저03','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+INSERT INTO user_info
+VALUES('user04','user04','유저04','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+INSERT INTO user_info
+VALUES('user05','user05','유저05','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+INSERT INTO user_info
+VALUES('user06','user06','유저06','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+INSERT INTO user_info
+VALUES('admin','user07','관리자','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+
+commit;
 
 -- bbs insert
 
-insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), '희망장난감신청합니다.', SYSDATE, 0, '배진솔', '솔솔1', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
+insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망장난감신청합니다.', SYSDATE, 0, '솔솔1', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
 
-insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), '희망장난감신청합니다.', SYSDATE, 0, '배진솔', '솔솔2', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
+insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망장난감신청합니다.', SYSDATE, 0, '솔솔2', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
 
-insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), '희망장난감신청합니다.', SYSDATE, 0, '배진솔', '솔솔3', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
+insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망장난감신청합니다.', SYSDATE, 0, '솔솔3', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
 
-insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), '희망장난감신청합니다.', SYSDATE, 0, '배진솔', '솔솔4', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
+insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망장난감신청합니다.', SYSDATE, 0, '솔솔4', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
 
-insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), '희망장난감신청합니다.', SYSDATE, 0, '배진솔', '솔솔5', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
-
---reply insert
-insert into reply values((SELECT NVL(MAX(reply_code)+1, 1) FROM reply), 5, '댓글입니다', SYSDATE, '진솔이댓글');
-
-insert into reply values((SELECT NVL(MAX(reply_code)+1, 1) FROM reply), 3, '댓글입니다', SYSDATE, '진솔이댓글');
-
-insert into reply values((SELECT NVL(MAX(reply_code)+1, 1) FROM reply), 1, '댓글입니다', SYSDATE, '진솔이댓글');
+insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망장난감신청합니다.', SYSDATE, 0, '솔솔5', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
 
 commit;
+
+
