@@ -50,10 +50,9 @@ function conditionPage(strPage){
 
 //list data 뿌려주기
 function bbsList(msg) {
-	("조건성공했어??")
 	//json 객체를 자바스크립트 객체로 변환
 	var listData = eval("("+msg+")");
-	$(".table tbody").empty();
+	$(".table #bbsList").empty();
 	resultPage = listData.resultPage;
 	list='';
 	list=listData.list;
@@ -101,7 +100,7 @@ function bbsList(msg) {
 			appendContent+='<td width="15%">'+list[i].writer+'</td><td width="15%">'+list[i].regDate+'</td><td width="10%">'+list[i].count+'</td></tr>';
 			
 			
-			$(".table tbody").append(appendContent);
+			$(".table #bbsList").append(appendContent);
 			
 		}
 		//alert(appendContent);
