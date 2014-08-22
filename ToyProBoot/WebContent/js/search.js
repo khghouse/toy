@@ -31,13 +31,13 @@
 		    url="/app/showList";
 		    url=loadPage(url);
 		    url=url+"/null/null";
-		    alert('222');
+		    /*alert('222');*/
 		    $.ajax({
 		        type: "POST",
 		        url:url ,
 		        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		        success: function(msg) {
-		        	alert('list');
+		        	/*alert('list');*/
 		        	showList(msg);
 		        }
 		    });
@@ -75,7 +75,7 @@
     	list='';
     	list=json.list;
     	search=json.search;
-    	alert("리스트사이즈:"+list.length);
+    	/*alert("리스트사이즈:"+list.length);*/
     	$("#search_list .row").empty();
     	$("#search_page .row").empty();
 
@@ -224,7 +224,7 @@
 		.append(popupuseage).append(popupbusiness).append(popupregion).append(popupmadedate);
 		superbox.append(popupimage);
 		if(toyrentalState="대출가능"){
-			alert("대출가능 ??");
+			/*alert("대출가능 ??");*/
 			superbox.append(popupbtn);
 		}
 		
