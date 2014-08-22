@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  		<typeAlias alias="guroRentalShop" type="spring.domain.guro.GuroRentalShop"/>
  		<typeAlias alias="bbs" type="spring.domain.BBS"/>
  		<typeAlias alias="reply" type="spring.domain.Reply"/>
+ 		<typeAlias alias="user" type="spring.domain.User"/>
  		<!-- <typeAlias alias="notice" type="spring.domain.Notice"/>
  		<typeAlias alias="wish" type="spring.domain.Wish"/> -->
  		<!-- <typeAlias alias="donate" type="spring.domain.Donate"/> -->
@@ -38,5 +39,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  		<mapper resource="sql/ReplyMapper.xml"/>
  		<mapper resource="sql/ContactMapper.xml"/>
  		<mapper resource="sql/ParseMapper.xml"/>
+ 		<mapper resource="sql/UserMapper.xml"/>
  	</mappers>
  </configuration>

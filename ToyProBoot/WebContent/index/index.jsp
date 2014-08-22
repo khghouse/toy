@@ -51,12 +51,14 @@
 <!--     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script type="text/javascript" src="../js/map.js"></script>
+    <script type="text/javascript" src="../js/join.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
     <!-- <script type="text/javascript" src="../js/contact.js"></script> -->
 
     <!-- Script to Activate the Carousel -->
     <script>
     $('.carousel').carousel({
-        interval: 5000 //changes the speed
+        interval: 2000 //changes the speed
     })
     </script>
 
