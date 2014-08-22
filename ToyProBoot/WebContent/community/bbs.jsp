@@ -24,7 +24,6 @@ ajaxConnect();
         </div>
         <!-- /.row -->
         
-		<table class="table">
 				
 			<div class="row">
 			 <div class="col-lg-8">
@@ -55,6 +54,8 @@ ajaxConnect();
 			</div><!-- /.row -->
 			<p/>
 			
+		<table class="table">
+		
 			<tr>
 				<th width="10%">번호</th>
 				<th width="40%">제목</th>
@@ -63,6 +64,7 @@ ajaxConnect();
 				<th width="15%">등록일</th>
 				<th width="10%">조회수</th>
 			</tr>
+			<tbody id="bbsList"> </tbody>
 
 		</table>
 		
