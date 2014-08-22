@@ -15,7 +15,7 @@
 <style>
 ul {
 	padding: 0 0 0 0;
-	margin: 10%;
+	margin: 0 0 0 0;	
 }
 
 ul li {
@@ -89,20 +89,7 @@ ul li img {
 		</script>
 	</div>
 	<div class="container">
-		<!-- Page Heading/Breadcrumbs -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Gallery
-                    <small></small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Community</li>
-                </ol>
-            </div>
-        </div>
-        <!-- /.row -->
-	<!-- 	<div class="row"
+		<div class="row"
 			style="text-align: center; border-bottom: 1px dashed #ccc; padding: 0 0 20px 0; margin-bottom: 40px;">
 			<h3 style="font-family: arial; font-weight: bold; font-size: 30px;">
 				<a style="text-decoration: none; color: #666;" href="">Bootstrap
@@ -110,22 +97,57 @@ ul li img {
 				</a>
 			</h3>
 			<p>
-				íìí©ëë¤. ì´ê³³ì <strong><a style="color: red"
-					href="index.jsp#">Image Gallery</a></strong> ìëë¤.
+				환영합니다. 이곳은 <strong><a style="color: red" href="index.jsp#">Image
+						Gallery</a></strong> 입니다.
 			</p>
 		</div>
 
 		<div>
-			<form action="../upload" method="post" enctype="multipart/form-data">
-				<input type="file" name="imageFile"><br> <input
-					type="submit" value="ì ì¡">
-			</form>
-		</div> -->
-		<center>
-			<ul id="imgList" class="row">
+		
+		</div>
 
-			</ul>
-		</center>
+		<ul class="row">		
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/a.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/b.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/c.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/d.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/e.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/f.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/g.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/h.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/i.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/j.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/k.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/l.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/m.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/n.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/o.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/p.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/q.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/r.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/s.jpg"></li>
+			<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
+				class="img-responsive" src="../images/images2/t.jpg"></li>
+		</ul>
 	</div>
 	<!-- /container -->
 
@@ -145,42 +167,10 @@ ul li img {
 </body>
 
 <script>
-	$.ajax({
-		type : "POST",
-		url : "/app/showImg",
-		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-		error : function(request, status, error) {
-			alert("code:" + request.status + "\n" + "message:"
-					+ request.responseText + "\n" + "error:" + error);
-		},
-		success : function(msg) {
-
-			showImg(msg);
-
-		}
-	});
-	function showImg(msg) {
-		var json = JSON.parse(msg);
-		list = json.list;
-		var imgSrc;
-		if (list.length != 0) {
-
-			for ( var i = 0; i < list.length; i++) {
-				imgSrc = "../images/images/" + list[i];
-				var appendContent = '<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">'
-						+ '<img class="img-responsive" src="'+imgSrc+'"></li>';
-				$("#imgList").append(appendContent);
-
-			}
-		}
-	}
 	$(document)
 			.ready(
-					
-					
-					
 					function() {
-						$('#imgList li img')
+						$('li img')
 								.on(
 										'click',
 										function() {
@@ -231,7 +221,6 @@ ul li img {
 					})
 
 	//new code
-
 	$(document).on('click', 'a.controls', function() {
 		var index = $(this).attr('href');
 		var src = $('ul.row li:nth-child(' + index + ') img').attr('src');
