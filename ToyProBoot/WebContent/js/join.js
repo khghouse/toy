@@ -71,7 +71,6 @@ function joinEventListener(){
 		}
 		
 		$('#userPw2').keyup(function(){
-			//userPw1 = $('#userPw1').val();
 			userPw2 = $('#userPw2').val();
 			$('#checkPw2').show();
 			if(userPw1.length>15||userPw1.length<8){
@@ -100,7 +99,7 @@ function joinEventListener(){
 		$.ajax({
 			url:"/app/user/join",
 			type:"POST",
-			data:str/*"userId=jeong725&userPw=jeong725&userName=혜림&tel=010-3534-2507"*/,
+			data:str,
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			beforeSend:function(){
@@ -112,13 +111,10 @@ function joinEventListener(){
 	        },
 			success:function(){
 				alert("회원가입이 완료되었습니다.");
-				alert(str+"str");
-				changeContent("/index/index.jsp");
+				//changeContent("/index/index.jsp");
 			}
 		});//ajax
 			
-			
 	});//btn_join click
 		
-
 }//joinEventListener();

@@ -87,7 +87,7 @@
 				<div class="col-lg-offset-6">
 	
 					<div class="btn-group">
-						<button id="btn_join" type="button" class="btn btn-primary btn-sm">가입하기</button>
+						<button id="btn_join" type="button" class="btn btn-primary btn-sm" onClick="changeContent('/index/index.jsp');">가입하기</button>
 					</div>
 					
 					<div class="btn-group">

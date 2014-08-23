@@ -49,7 +49,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" onclick="changeContent('../user/login.jsp')">Login</a>
+                        <a href="#" id="aLogin" onclick="changeContent('../user/login.jsp')">Login</a>
                     </li>
                 </ul>
 <!--                 <form class="navbar-form navbar-right">

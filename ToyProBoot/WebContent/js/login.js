@@ -27,12 +27,10 @@ function loginEventListener(){
 		           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        },
 	        success:function(msg){
-	        	alert("msg찍어보기\n"+msg);
-	        	alert("btn_login click() success 성공함");
-	        	alert(msg.userName);
-	        	alert("success userName");
-	        	showUser(msg);
-	        	
+	        	alert("로긴성공함");
+	        	var alogin = $('#aLogin').text();
+	        	var myPage = $('#aLogin').text("MyPage");
+	        	alert(myPage+"2");
 	        }
 		});//ajax
 	});//$('#btn_login').click()
