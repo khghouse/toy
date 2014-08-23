@@ -29,7 +29,13 @@ ajaxConnect();
 			 <div class="col-lg-8">
 			    <div class="input-group">
 			      <div class="input-group-btn">
+			      <c:if test="${user.userId != null }">
 			        <button type="button" class="btn btn-primary btn-sm"  onclick="changeContent('/app/bbs/addBBSContentForm')">글쓰기</button>
+			      </c:if>
+			      <input type="hidden" id="userId" value="${user.userId}"/>
+			      <c:if test="${user.userId == null }">
+			        <button type="button" class="btn btn-primary btn-sm"  onclick="loginck();">글쓰기</button>
+			      </c:if>
 			      </div><!-- /btn-group -->
 			    </div><!-- /input-group -->
 			  </div>

@@ -187,7 +187,7 @@ function formAddRecontent() {
 	
 	var code = document.getElementById("code").value; 
 	var subject = document.getElementById("subjectId").value;
-	var userId = document.getElementById("userId").value;
+	/*var userId = document.getElementById("userId").value;*/
 	var content = document.getElementById("contentId").value;
 	var attachment = document.getElementById("bbs_attachment").value; 
 	
@@ -196,7 +196,7 @@ function formAddRecontent() {
 	var groupStep = document.getElementById("groupStep").value; 
 	var groupTab = document.getElementById("groupTab").value; 
 	
-	var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","userId":"'+userId+'","content":"'+content+'","attachment":"'+attachment+'","root":"'+root+'","groupId":"'+groupId+'","groupStep":"'+groupStep+'","groupTab":"'+groupTab+'"}';
+	var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","content":"'+content+'","attachment":"'+attachment+'","root":"'+root+'","groupId":"'+groupId+'","groupStep":"'+groupStep+'","groupTab":"'+groupTab+'"}';
 	
 	if(attachment == ''){
 		attachment = "empty";
@@ -327,4 +327,27 @@ function deleteReply(replyCode) {
 			changeContent('/app/bbs/getBBSContentReply/'+code+'');
 		}
 	});
+}
+
+function loginck() {
+	var userId = document.getElementById("userId").value;
+	
+	/*if(userId == ''){*/
+		alert("로그인페이지로 이동합니다.");
+		
+		var url = changeContent('../user/login.jsp');
+		
+		$.ajax({
+			type: "POST",
+			url: url,
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			error:function(request,status,error){
+		           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        },
+			success:function(msg){
+				
+			}
+		});
+	/*}*/
+	
 }

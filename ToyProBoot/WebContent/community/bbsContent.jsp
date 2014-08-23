@@ -24,12 +24,12 @@
 	  
 	    <label class="col-lg-2 control-label">제목</label>
 	    <div class="col-lg-10">
-	      <p class="form-control-static">${bbs.subject }</p>
+	      <p class="form-control-static" id="subjectId">${bbs.subject }</p>
 	    </div>
 	    
 	    <label class="col-lg-2 control-label">작성자</label>
 	    <div class="col-lg-10">
-	      <p class="form-control-static" >${user.userId }</p>
+	      <p class="form-control-static" >${bbs.userId.userId }</p>
 	    </div>
 	    
 	    <label class="col-lg-2 control-label">작성일</label>
@@ -39,7 +39,7 @@
 	    
 	    <label class="col-lg-2 control-label">첨부파일</label>
 	    <div class="col-lg-10">
-	      <p class="form-control-static">[&nbsp;${bbs.attachment }&nbsp;]</p>
+	      <p class="form-control-static" id="bbs_attachment">[&nbsp;${bbs.attachment }&nbsp;]</p>
 	    </div> 
 	    
 	    <label class="col-lg-2 control-label">내용</label>
@@ -122,18 +122,27 @@
    			 </div>
    			 <hr id="reply_hr">
    			 <input type="hidden" name="code" id="codeId" value="${bbs.code }"/>
+   			 <input type="hidden" name="userId" id="userId" value="${user.userId}"/>
 		</form>
 		
 		
-			
 			<!--  button -->
 			<p align="right" id="bbs_reply">
-			<c:if test="${bbs.root == 0 }">
-				<button type="button" class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/addBBSReContentForm/${bbs.code }')">답글</button>
+			<c:if test="${user.userId == null}">
+				<button type="button" class="btn btn-default btn-sm" onclick="loginck();">답글</button>
 			</c:if>
-			<button type="button" class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/updateBBSContentForm/${bbs.code}')">수정</button>
+			<c:if test="${user.userId!=null && bbs.root == 0}">
+				<c:if test="${user.userId != bbs.userId.userId}">
+					<button type="button" class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/addBBSReContentForm/${bbs.code }')">답글</button>
+				</c:if>
+			</c:if>
+			<c:if test="${user.userId=='admin'  || (user.userId == bbs.userId.userId)}">
+				<c:if test="${ user.userId == bbs.userId.userId}">
+					<button type="button" class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/updateBBSContentForm/${bbs.code}')">수정</button>
+				</c:if>
+				<button type="button" class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/deleteBBSContent/${bbs.code}/${bbs.depth }')">삭제</button>
+			</c:if>
 			<button type="button" class="btn btn-default btn-sm" onclick="changeContent('../community/bbs.jsp')">목록</button>
-			<button type="button" class="btn btn-default btn-sm" onclick="changeContent('/app/bbs/deleteBBSContent/${bbs.code}/${bbs.depth }')">삭제</button>
 			</p>
 			
   	</div>
