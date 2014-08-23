@@ -42,7 +42,7 @@
 				<div class="col-lg-offset-6">
 	
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary btn-sm" id="btn_login" onClick="changeContent('/index/index.jsp')" >로그인</button>
+						<button type="button" class="btn btn-primary btn-sm" id="btn_login" onClick="changeContent('/index/index.jsp');" >로그인</button>
 					</div>
 					
 					<div class="btn-group">

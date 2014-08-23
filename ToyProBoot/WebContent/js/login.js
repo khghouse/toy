@@ -28,9 +28,7 @@ function loginEventListener(){
 	        },
 	        success:function(msg){
 	        	alert("로긴성공함");
-	        	var alogin = $('#aLogin').text();
-	        	var myPage = $('#aLogin').text("MyPage");
-	        	alert(myPage+"2");
+	        	$('#aLogin').text("MyPage");
 	        }
 		});//ajax
 	});//$('#btn_login').click()
