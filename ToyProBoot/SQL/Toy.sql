@@ -496,7 +496,7 @@ INSERT INTO user_info
 VALUES('user06','user06','유저06','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
 
 INSERT INTO user_info
-VALUES('admin','user07','관리자','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
+VALUES('admin','1234','관리자','010-1234-5678','hrjeong7@toy.com',1,'서울시 서초구 서초동 비트 504호',SYSDATE);
 
 commit;
 
