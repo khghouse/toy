@@ -3,6 +3,8 @@ package spring.web.bbs;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import spring.domain.BBS; 
+import spring.domain.BBS;
 import spring.domain.Page;
 import spring.domain.Search;
+import spring.domain.User;
 import spring.service.bbs.BBSService;
 import spring.service.reply.ReplyService;
 
@@ -83,7 +87,11 @@ public class BBSController{
 		String jsonList = objMapper.writeValueAsString(bbsMap);
 		return jsonList;
 	}
-	
+	@RequestMapping(value="/addBBSContentForm")
+	public String addBBSContentForm(HttpSession session) throws Exception{
+		((User) session.getAttribute("user")).getUserId();
+		return "/community/addBBSContentForm.jsp";
+	}
 	
 	@RequestMapping(value="/getBBSContent/{code}")
 	public String getBBSContent(@PathVariable int code, Model model) throws Exception{
@@ -95,7 +103,8 @@ public class BBSController{
 	
 	
 	@RequestMapping(value="/addBBSReContentForm/{code}")
-	public String addBBSReContentForm(@PathVariable int code, Model model) throws Exception{
+	public String addBBSReContentForm(@PathVariable int code, Model model, HttpSession session) throws Exception{
+		((User) session.getAttribute("user")).getUserId();
 		model.addAttribute("bbs", bbsService.getBBSContent(code));
 		return "/community/addBBSReContentForm.jsp";
 	}
@@ -119,16 +128,17 @@ public class BBSController{
 		return null;
 	}
 	
-	@RequestMapping(value="/addBBSContent/{subject}/{writer}/{content}/{attachment}")
-	public @ResponseBody String addBBSContent(@PathVariable String subject, @PathVariable String writer, @PathVariable String content, @PathVariable String attachment) throws Exception{
+	@RequestMapping(value="/addBBSContent/{subject}/{content}/{attachment}")
+	public @ResponseBody String addBBSContent(@PathVariable String subject, @PathVariable String content, @PathVariable String attachment, HttpSession session) throws Exception{
 		if(attachment.equals("empty")){
 			attachment="";
 		}
-		BBS bbs = new BBS(subject, writer, content, attachment);
+		/*String userId = ((User) session.getAttribute("user")).getUserId();*/
+		User user = (User)session.getAttribute("user");
+		BBS bbs = new BBS(subject, user, content, attachment);
 		bbsService.insertBBSContent(bbs);
 //		int code = bbsService.getMaxCode();
 //		BBS content=bbsService.getReviewContent(code);
-		
 		return null;
 	}
 	
@@ -146,7 +156,6 @@ public class BBSController{
 	
 	@RequestMapping(value="/updateBBSContentForm/{code}")
 	public String updateBBSContentForm(@PathVariable int code, Model model) throws Exception{
-		
 		BBS bbs = new BBS();
 		bbs.setCode(code);
 		model.addAttribute("bbs", bbsService.getReviewContent(code));
@@ -158,13 +167,14 @@ public class BBSController{
 	public @ResponseBody String updateBBSContent(@PathVariable String jsonValue) throws Exception{
 		System.out.println("update이다");
 		System.out.println(jsonValue);*/
-	@RequestMapping(value="/updateBBSContent/{code}/{subject}/{writer}/{content}/{attachment}")
-	public @ResponseBody String updateBBSContent(@PathVariable int code, @PathVariable String subject, @PathVariable String writer, @PathVariable String content, @PathVariable String attachment) throws Exception{
+	@RequestMapping(value="/updateBBSContent/{code}/{subject}/{content}/{attachment}")
+	public @ResponseBody String updateBBSContent(@PathVariable int code, @PathVariable String subject, @PathVariable String content, @PathVariable String attachment) throws Exception{
 		
 		BBS bbs = new BBS();
 		bbs.setCode(code);
 		bbs.setSubject(subject);
-		bbs.setWriter(writer);
+		/*User user = (User)session.getAttribute("user");
+		bbs.setUserId(user);*/
 		bbs.setContent(content);
 		bbs.setAttachment(attachment);
 		

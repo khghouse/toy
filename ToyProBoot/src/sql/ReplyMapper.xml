@@ -9,9 +9,9 @@
 	<resultMap type="reply" id="replySelectMap">
 		<result property="replyCode" column="reply_code" jdbcType="NUMERIC"/>
 		<result property="code.code" column="code" jdbcType="NUMERIC"/>
+		<result property="userId.userId" column="user_id" jdbcType="VARCHAR"/>
 		<result property="replyContent" column="reply_content" jdbcType="VARCHAR"/>
 		<result property="regDate" column="reg_date" jdbcType="VARCHAR"/>
-		<result property="replyWriter" column="reply_writer" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	
@@ -20,14 +20,14 @@
 		INTO reply
 		VALUES( (SELECT NVL(MAX(reply_code)+1, 1) FROM reply),
 					#{code.code:VARCHAR},
+					#{userId.userId:VARCHAR},
 					#{replyContent:VARCHAR},
-					SYSDATE,
-					#{replyWriter:VARCHAR}
+					SYSDATE
 					)
 	</insert>
 	
 	<select id="getReply" parameterType="int" resultMap="replySelectMap">
-		SELECT reply_code, code, reply_content, reg_date, reply_writer
+		SELECT reply_code, code, reply_content, reg_date, user_id
 		FROM reply
 		WHERE code = #{value} 
 		ORDER BY reply_code DESC

@@ -1,6 +1,7 @@
 package spring.web.reply;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import spring.domain.BBS;
 import spring.domain.Reply;
+import spring.domain.User;
 import spring.service.reply.ReplyService;
 
 @Controller
@@ -25,14 +27,15 @@ public class ReplyController{
 	
 	
 	@RequestMapping(value="/addReply/{bbsCode}/{replyContent}")
-	public @ResponseBody String addReply(@PathVariable int bbsCode, @PathVariable String replyContent) throws Exception{
+	public @ResponseBody String addReply(@PathVariable int bbsCode, @PathVariable String replyContent, HttpSession session) throws Exception{
 		
 		Reply reply = new Reply();
 		BBS bbs = new BBS();
 		bbs.setCode(bbsCode);
 		reply.setCode(bbs);
 		reply.setReplyContent(replyContent);
-		reply.setReplyWriter("관리자");
+		User user = (User)session.getAttribute("user");
+		reply.setUserId(user);
 		
 		replyService.insertReply(reply);
 		

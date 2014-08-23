@@ -5,10 +5,10 @@ import java.util.Date;
 public class BBS {
 	
 	private int code;
+	private User userId;
 	private String subject;
 	private String regDate;
 	private int count;
-	private String writer;
 	private String content;
 	private String attachment;
 	private int groupId;
@@ -19,15 +19,13 @@ public class BBS {
 	
 	public BBS(){}
 	
-	public BBS(String subject, String writer, String content, String attachment) {
+	public BBS(String subject, User userId, String content, String attachment) {
 		super();
 		this.subject = subject;
-		this.writer = writer;
+		this.userId = userId;
 		this.content = content;
 		this.attachment = attachment;
 	}
-
-
 
 	public int getCode() {
 		return code;
@@ -35,6 +33,14 @@ public class BBS {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
 	}
 
 	public String getSubject() {
@@ -59,14 +65,6 @@ public class BBS {
 
 	public void setCount(int count) {
 		this.count = count;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 
 	public String getContent() {
@@ -127,14 +125,12 @@ public class BBS {
 
 	@Override
 	public String toString() {
-		return "BBS [code=" + code + ", subject=" + subject + ", regDate="
-				+ regDate + ", count=" + count + ", writer=" + writer
+		return "BBS [code=" + code + ", userId=" + userId + ", subject="
+				+ subject + ", regDate=" + regDate + ", count=" + count
 				+ ", content=" + content + ", attachment=" + attachment
 				+ ", groupId=" + groupId + ", groupStep=" + groupStep
 				+ ", groupTab=" + groupTab + ", root=" + root + ", depth="
 				+ depth + "]";
 	}
-	
-	
 
 }
