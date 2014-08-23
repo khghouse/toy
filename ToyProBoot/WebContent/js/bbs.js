@@ -97,7 +97,7 @@ function bbsList(msg) {
 				appendContent+='<td width="10%">'+list[i].attachment+'</td>';
 			}
 			
-			appendContent+='<td width="15%">'+list[i].writer+'</td><td width="15%">'+list[i].regDate+'</td><td width="10%">'+list[i].count+'</td></tr>';
+			appendContent+='<td width="15%">'+list[i].userId.userId+'</td><td width="15%">'+list[i].regDate+'</td><td width="10%">'+list[i].count+'</td></tr>';
 			
 			
 			$(".table #bbsList").append(appendContent);
@@ -157,15 +157,16 @@ function listPage(currentPage){
 function formAddcontent() {
 	var form = document.getElementById("bbsForm");
 	var subject = document.getElementById("subjectId").value;
-	var writer = document.getElementById("writerId").value;
+	/*var userId = document.getElementById("userId").value;*/
 	var content = document.getElementById("contentId").value;
 	var attachment = document.getElementById("bbs_attachment").value; 
+	
 	
 	if(attachment == ''){
 		attachment = "empty";
 	}
 	
-	var url = "/app/bbs/addBBSContent/"+subject+"/"+writer+"/"+content+"/"+attachment;
+	var url = "/app/bbs/addBBSContent/"+subject+"/"+content+"/"+attachment;
 	
 	$.ajax({
 		type: "POST",
@@ -186,7 +187,7 @@ function formAddRecontent() {
 	
 	var code = document.getElementById("code").value; 
 	var subject = document.getElementById("subjectId").value;
-	var writer = document.getElementById("writerId").value;
+	var userId = document.getElementById("userId").value;
 	var content = document.getElementById("contentId").value;
 	var attachment = document.getElementById("bbs_attachment").value; 
 	
@@ -195,7 +196,7 @@ function formAddRecontent() {
 	var groupStep = document.getElementById("groupStep").value; 
 	var groupTab = document.getElementById("groupTab").value; 
 	
-	var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","writer":"'+writer+'","content":"'+content+'","attachment":"'+attachment+'","root":"'+root+'","groupId":"'+groupId+'","groupStep":"'+groupStep+'","groupTab":"'+groupTab+'"}';
+	var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","userId":"'+userId+'","content":"'+content+'","attachment":"'+attachment+'","root":"'+root+'","groupId":"'+groupId+'","groupStep":"'+groupStep+'","groupTab":"'+groupTab+'"}';
 	
 	if(attachment == ''){
 		attachment = "empty";
@@ -222,7 +223,7 @@ function formUpdate() {
 	
 	var code = document.getElementById("code").value; 
 	var subject = document.getElementById("subjectId").value;
-	var writer = document.getElementById("writerId").value;
+	/*var userId = document.getElementById("userId").value;*/
 	var content = document.getElementById("contentId").value;
 	var attachment = document.getElementById("bbs_attachment").value; 
 	
@@ -230,11 +231,11 @@ function formUpdate() {
 		attachment = "empty";
 	}
 	
-	//var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","writer":"'+writer+'","content":"'+content+'","attachment":"'+attachment+'"}';
+	//var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","userId":"'+userId+'","content":"'+content+'","attachment":"'+attachment+'"}';
 	
 	//var url = "/app/bbs/updateBBSContent/"+jsonValue;
 	
-	var url = "/app/bbs/updateBBSContent/"+code+"/"+subject+"/"+writer+"/"+content+"/"+attachment;
+	var url = "/app/bbs/updateBBSContent/"+code+"/"+subject+"/"+content+"/"+attachment;
 	
 	
 	$.ajax({
@@ -254,6 +255,7 @@ function formUpdate() {
 function addReply() {
 	var replyContent = document.getElementById("reply_textarea").value;
 	var code = document.getElementById("codeId").value;
+	/*var userId = document.getElementById("userId").value;*/
 	/*var jsonValue = '{"code" : "'+code+'","replyContent":"'+replyContent+'"}';
 	alert(jsonValue);*/
 	

@@ -29,7 +29,7 @@
 	    
 	    <label class="col-lg-2 control-label">작성자</label>
 	    <div class="col-lg-10">
-	      <p class="form-control-static">${bbs.writer }</p>
+	      <p class="form-control-static" >${user.userId }</p>
 	    </div>
 	    
 	    <label class="col-lg-2 control-label">작성일</label>
@@ -75,7 +75,7 @@
 			 <div class="col-lg-10">
 		    	<textarea id="reply_textarea" rows="3" ></textarea>
 			</div>	
-			
+			<%-- <input type="hidden" name="userId" id="userId" value="${user.userId}"/> --%>
 		    <button type="button" class="btn btn-default btn-sm" id="reply_btn" onclick="addReply();">댓글등록</button>
 			<!-- 공백 -->
 			<label class="col-lg-2 control-label"></label>
@@ -90,7 +90,7 @@
 					<input type="hidden" name="replyCode" id="replyCodeId${reply.replyCode }" value="${reply.replyCode }"/>
 					
 					<div class="col-lg-8">
-			 			<span class="reply_writer">${reply.replyWriter }</span><span class="reply_regdate">&nbsp;&nbsp;${reply.regDate }</span>
+			 			<span class="reply_writer">${user.userId }</span><span class="reply_regdate">&nbsp;&nbsp;${reply.regDate }</span>
 			 		</div>
 			 		<div class="col-lg-4" >
 			  			<%-- <label class="control-label" for="inputWarning">${reply.replyWriter }<span id="reply_regdate">&nbsp;&nbsp;${reply.regDate }</span><span id="reply_a">수정 | 삭제</span></label> --%>

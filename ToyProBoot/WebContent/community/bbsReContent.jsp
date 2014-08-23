@@ -33,7 +33,7 @@
 	    
 	    <label class="col-lg-2 control-label">작성자</label>
 	    <div class="col-lg-10">
-	      <p class="form-control-static">${bbs.writer }</p>
+	      <p class="form-control-static">${user.userId }</p>
 	    </div>
 	    
 	    <label class="col-lg-2 control-label">작성일</label>

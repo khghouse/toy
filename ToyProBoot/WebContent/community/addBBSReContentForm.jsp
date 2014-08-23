@@ -30,7 +30,7 @@
 	  <div class="form-group">
 	    <label for="inputEmail1" class="col-lg-2 control-label">작성자</label>
 	    <div class="col-lg-10">
-	      <input type="text"  name="writer" class="form-control" id="writerId" placeholder="작성자"/>
+	      <input type="text"  name="userId" class="form-control" id="userId" value="${user.userId }"/>
 	    </div>
 	  </div>
 	  
@@ -44,7 +44,7 @@
 	  <div class="form-group">
 	    <label for="inputEmail1" class="col-lg-2 control-label">첨부파일</label>
 	    <div class="col-lg-10">
-	      <input type="file"  name="writer" id="bbs_attachment" placeholder="첨부파일"/>
+	      <input type="file"  name="attachment" id="bbs_attachment" placeholder="첨부파일"/>
 	    </div>
 	  </div>
 	  
