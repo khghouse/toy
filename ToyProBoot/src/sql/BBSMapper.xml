@@ -97,10 +97,10 @@
 		INSERT
 		INTO bbs
 		VALUES( (SELECT NVL(MAX(code)+1, 1) FROM bbs),
+					#{userId.userId:VARCHAR},
 					#{subject:VARCHAR},
 					SYSDATE,
 					0,
-					#{userId.userId:VARCHAR},
 					#{content:VARCHAR},
 					#{attachment:VARCHAR},
 					#{groupId:NUMERIC},

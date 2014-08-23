@@ -103,7 +103,7 @@ public class BBSController{
 	
 	
 	@RequestMapping(value="/addBBSReContentForm/{code}")
-	public String addBBSReContentForm(@PathVariable int code, Model model, HttpSession session) throws Exception{
+	public String addBBSReContentForm(@PathVariable int code, HttpSession session, Model model) throws Exception{
 		((User) session.getAttribute("user")).getUserId();
 		model.addAttribute("bbs", bbsService.getBBSContent(code));
 		return "/community/addBBSReContentForm.jsp";
@@ -111,12 +111,13 @@ public class BBSController{
 	
 	
 	@RequestMapping(value="/addBBSReContent/{jsonValue}")
-	public @ResponseBody String addBBSReContent(@PathVariable String jsonValue) throws Exception{
+	public @ResponseBody String addBBSReContent(@PathVariable String jsonValue, HttpSession session) throws Exception{
 		ObjectMapper objMapper = new ObjectMapper();
 		
 		BBS bbs  = objMapper.readValue(jsonValue, BBS.class);
+		User user = (User)session.getAttribute("user");
+		bbs.setUserId(user);
 		System.out.println(bbs);
-		
 		bbsService.insertBBSReContent(bbs);
 		bbsService.updateDepth(bbs);
 		
