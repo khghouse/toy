@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updateUser(User user) throws Exception {
-		return sqlSession.selectOne("UserMapper.updateUser", user);
+		return sqlSession.update("UserMapper.updateUser", user);
 	}
 
 	@Override

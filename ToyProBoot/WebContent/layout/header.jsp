@@ -51,6 +51,17 @@
                     <li>
                         <a href="#" id="aLogin" onclick="changeContent('../user/login.jsp')">Login</a>
                     </li>
+                    <li id="myPage" style="display:none;" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MyPage<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" onclick="changeContent('../user/updateUser.jsp')">MyPage</a>
+                            </li>
+                            <li>
+                                <a id="aLogout" href="#" onclick="changeContent('../index/mainContent.jsp')">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 <!--                 <form class="navbar-form navbar-right">
 		            <div class="form-group">
@@ -66,3 +77,10 @@
         </div>
         <!-- /.container -->
     </nav>
+    
+<script type="text/javascript">
+	/* (function(){
+		alert("already");
+		
+	})(); */
+</script>

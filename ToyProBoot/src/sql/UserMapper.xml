@@ -47,20 +47,20 @@
 		FROM (<include refid="getUserList"/>)
 	</select> -->
 	
-	<!-- <update id="updateUser" parameterType="user">
+	<update id="updateUser" parameterType="user">
 		UPDATE user_info 
 		<trim prefix="set" suffixOverrides=",">
 			<if test="userPw != null">
 				user_pw = #{userPw},
 			</if>
 			tel = #{tel:VARCHAR}, 
-			email = #{email}, 
-			email_receive = #{emailRecieve:INTEGER}, 
-			addr = #{addr}
+			email = #{email:VARCHAR}, 
+			email_receive = #{emailReceive:INTEGER}, 
+			addr = #{addr:VARCHAR}
 		</trim>
 		WHERE user_id=#{userId}
 	</update>
-	 -->
+	
 	<!-- <delete id="deleteUser" parameterType="user">
 		DELETE user_info 
 		WHERE user_id = #{userId};

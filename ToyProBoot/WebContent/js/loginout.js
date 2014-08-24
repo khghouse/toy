@@ -1,4 +1,4 @@
-function loginEventListener(){
+function loginoutEventListener(){
 	
 	$('#btn_login').click(function(){
 		var userId = $('#userId').val();
@@ -24,15 +24,24 @@ function loginEventListener(){
 			cache:false,
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			error:function(request,status,error){
-		           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		           //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("아이디와 비밀번호를 확인해주세요.");
+				changeContent("../user/login.jsp");
 	        },
 	        success:function(msg){
-	        	alert("로긴성공함");
-	        	$('#aLogin').text("MyPage");
+	        	$('#aLogin').css("display","none");
+	        	$('#myPage').css("display","block");
+	        	changeContent("../index/mainContent.jsp");
+	        	
 	        }
 		});//ajax
 	});//$('#btn_login').click()
-
+	
+	$('#aLogout').click(function(){
+		$('#myPage').css("display","none");
+		$('#aLogin').css("display","block");
+	});//$('#aLogout').click()
+	
 }//loginEventListener()
 
 //유저 session

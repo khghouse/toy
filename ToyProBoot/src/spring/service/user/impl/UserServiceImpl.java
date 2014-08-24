@@ -57,8 +57,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loginUser(User user) throws Exception {
-		System.out.println("유저서비스임플 로그인유저 메서드 시작");
-		System.out.println("유저값 찍어보기 "+user.getUserId()+"값찍어봄 ");
 		 User dbUser = (User)userDao.getUser(user.getUserId());
 		 if(!dbUser.getUserPw().equals(user.getUserPw()))
 			 throw new Exception("비밀번호가 일치하지 않습니다.");
