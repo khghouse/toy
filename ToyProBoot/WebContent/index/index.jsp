@@ -10,9 +10,9 @@
     <title>서울특별시 종합 장난감 도서관</title>
     
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/bootstrap.css" rel="stylesheet">
-
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	
     <!-- Custom CSS -->
     <link href="../css/toy.css" rel="stylesheet">
 	<link href="../css/list.css" rel="stylesheet">
