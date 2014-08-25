@@ -17,8 +17,8 @@
 		INSERT
 		INTO toy_info(toy_code, rental_code, category_code, toy_name, business, region, made_date, get_date, use_age, rental_state, toy_img)
 		VALUES(	#{toyIdid:VARCHAR},
-							<if test="brchName == '구로꿈나무장난감나라'">12,</if>
-							<if test="brchName == '개봉장난감나라'">13,</if>
+							<if test="brchName == '구로꿈나무장난감나라'">24,</if>
+							<if test="brchName == '개봉장난감나라'">25,</if>
 							<choose>
 								<when test="subject == '600' || subject == '700'">600,</when>
 								<when test="subject == '800' || subject == '900'">700,</when>

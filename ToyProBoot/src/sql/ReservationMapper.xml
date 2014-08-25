@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+		ProductMapper.xml
+		
+		- Product Component의 Business Logic을 구현?
+ -->
+ 
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper파일 최상위 태그 -->		
+<mapper namespace="ReservationMapper">
+
+	<resultMap type="reservation" id="reservationSelectMap">
+		<result property="reservationCode" column="reservation_code" jdbcType="NUMERIC"/>
+		<result property="userId.userId" column="user_id" jdbcType="VARCHAR"/>
+		<result property="rentalDate" column="rental_date" jdbcType="VARCHAR"/>
+		<result property="returnDate" column="return_date" jdbcType="VARCHAR"/>
+		<result property="toyCode.toyName" column="toy_name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+<!-- 	private int reservationCode;
+	private User userId;
+	private Toy toyCode;
+	private String regDate;
+	private String rentalDate;
+	private String returnDate; -->
+	
+	<insert id="addReservation" parameterType="reservation">
+		INSERT
+		INTO reservation
+		VALUES(	(SELECT NVL(MAX(reservation_code)+1, 1) FROM reservation),
+					#{userId.userId:VARCHAR},
+					#{toyCode.toyCode:VARCHAR},
+					#{toyCode.rentalCode.rentalCode:NUMERIC},
+					SYSDATE,
+					#{rentalDate:VARCHAR},
+					#{returnDate:VARCHAR}	)
+	</insert>	
+	
+	<sql id="sqlReservationList">
+		SELECT r.reservation_code, r.user_id, r.rental_date, r.return_date, t.toy_name
+		FROM reservation r, toy_info t
+		WHERE r.user_id = #{user.userId}
+		AND r.toy_code = t.toy_code
+		ORDER BY r.reservation_code DESC
+	</sql>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM (<include refid="sqlReservationList"/>) countTable
+	</select>
+	
+	<select id="getReservationList" parameterType="map" resultMap="reservationSelectMap">
+		SELECT reservation_code, user_id, rental_date, return_date, toy_name 
+		FROM (SELECT reservation_code, user_id, rental_date, return_date, toy_name, ROWNUM AS row_seq 
+				FROM (<include refid="sqlReservationList"/>)
+				WHERE ROWNUM &lt;= ${search.currentPage * search.pageSize} )
+		WHERE row_seq BETWEEN ${(search.currentPage - 1) * search.pageSize + 1} AND ${search.currentPage * search.pageSize}
+	</select>
+
+	<!-- <resultMap type="rentalShop" id="rentalShopSelectMap">
+		<result property="rentalCode" column="rental_code" jdbcType="NUMERIC"/>
+		<result property="rentalName" column="rental_name" jdbcType="VARCHAR"/>
+		<result property="latitude" column="latitude" jdbcType="VARCHAR"/>
+		<result property="longitude" column="longitude" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="getRentalShopData" parameterType="int" resultMap="rentalShopSelectMap">
+		SELECT rental_code, rental_name
+		FROM rental_shop
+		WHERE gu_code = #{value}
+	</select>
+	
+	<select id="getLocation" parameterType="int" resultMap="rentalShopSelectMap">
+		SELECT latitude, longitude
+		FROM rental_shop
+		WHERE rental_code = #{value}
+	</select> -->
+</mapper>
