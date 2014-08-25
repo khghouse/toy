@@ -34,7 +34,7 @@
 			<div class="form-group">
 				<label for="userPw1" class="col-lg-4 control-label"><i style="color:red;" class="fa fa-check"></i>비밀번호</label>
 				<div class="col-lg-8">
-					<input type="password" class="form-control" id="userPw1" placeholder="Password:작성후 수정됩니다.">
+					<input type="password" class="form-control" id="userPw1" placeholder="Password">
 					<div id="checkPw1" style="float: left; text-align: left"></div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<label for="userPw2" class="col-lg-4 control-label"><i style="color:red;" class="fa fa-check"></i>비밀번호 재확인</label>
 				<div class="col-lg-8">
-					<input type="password" class="form-control" name="userPw" id="userPw2" placeholder="Password:작성후 수정됩니다.">
+					<input type="password" class="form-control" name="userPw" id="userPw2" placeholder="Password">
 					<div id="checkPw2" style="float: left; text-align: left"></div>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 					</div>
 					
 					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-sm"onClick="resetData();">탈퇴하기</button>
+						<button id="btn_delete" type="button" class="btn btn-default btn-sm">탈퇴하기</button>
 					</div>
 					
 				</div>	
@@ -111,8 +111,5 @@
 
 <script type="text/javascript">
 		updateEventListener();
-		
-		function resetData(){
-			document.updateForm.reset();
-		}
+		deleteEventListener();
 </script>
