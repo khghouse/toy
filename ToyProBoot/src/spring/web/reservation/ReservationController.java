@@ -60,8 +60,8 @@ public class ReservationController
 		
 		reservationService.addReservation(reservation);
 	
-		/*return "/app/updateRentalState/"+toy.getToyCode()+"/"+toy.getRentalCode().getRentalCode();*/
-		return null;
+		return "/app/updateRentalState/"+toy.getToyCode()+"/"+toy.getRentalCode().getRentalCode();
+		/*return null;*/
 	}
 	
 	@RequestMapping(value="/getReservationList/{currentPage}")
