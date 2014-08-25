@@ -92,18 +92,15 @@ footer {
         height: 70%;
     }
 }
-#toyName{
-	font-size:13pt;
-	font-weight:900;
-}
-#rentalState{
-	font-size:10pt;
-	font-weight: 400;
-	color:#2F9D27;
+#info{
+	height:12%;
 }
 #toyName{
-	font-size:13pt;
+	height:80;
+	font-size:12pt;
 	font-weight:900;
+	vertical-align: middle;
+	display: table-cell;
 }
 #rentalState{
 	font-size:10pt;

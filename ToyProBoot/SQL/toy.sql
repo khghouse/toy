@@ -425,6 +425,31 @@ insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망�
 
 insert into bbs values((SELECT NVL(MAX(code)+1, 1) FROM bbs), 'admin', '희망장난감신청합니다.', SYSDATE, 0, '솔솔5', '', (SELECT NVL(MAX(group_id)+1, 1) FROM bbs), 0, 0, 0, 0);
 
+
+--gallery insert
+
+insert into gallery values(1,'a.jpg');
+insert into gallery values(2,'b.jpg');
+insert into gallery values(3,'c.jpg');
+insert into gallery values(4,'d.jpg');
+insert into gallery values(5,'e.jpg');
+insert into gallery values(6,'f.jpg');
+insert into gallery values(7,'g.jpg');
+insert into gallery values(8,'h.jpg');
+insert into gallery values(9,'i.jpg');
+insert into gallery values(10,'j.jpg');
+insert into gallery values(11,'k.jpg');
+insert into gallery values(12,'l.jpg');
+insert into gallery values(13,'m.jpg');
+insert into gallery values(14,'n.jpg');
+insert into gallery values(15,'o.jpg');
+insert into gallery values(16,'p.jpg');
+insert into gallery values(17,'q.jpg');
+insert into gallery values(18,'r.jpg');
+insert into gallery values(19,'s.jpg');
+
+
+
 commit;
 
 

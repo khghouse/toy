@@ -16,6 +16,7 @@
     <!-- Custom CSS -->
     <link href="../css/toy.css" rel="stylesheet">
 	<link href="../css/list.css" rel="stylesheet">
+	<link href="../css/gallery.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -53,6 +54,7 @@
     <script type="text/javascript" src="../js/map.js"></script>
     <script type="text/javascript" src="../js/user.js"></script>
     <script type="text/javascript" src="../js/loginout.js"></script>
+    <script type="text/javascript" src="../js/gallery.js"></script>
     <!-- <script type="text/javascript" src="../js/contact.js"></script> -->
 
     <!-- Script to Activate the Carousel -->

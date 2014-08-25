@@ -44,7 +44,7 @@
                                 <a href="#" onclick="changeContent('../community/bbs.jsp')">BBS</a>
                             </li>
                             <li>
-                                <a href="#" onclick="changeContent('../community/gallery2.jsp')">Gallery</a>
+                                <a href="#" onclick="changeContent('../community/gallery.jsp')">Gallery</a>
                             </li>
                         </ul>
                     </li>

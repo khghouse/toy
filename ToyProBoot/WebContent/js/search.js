@@ -21,6 +21,9 @@
 		        type: "POST",
 		        url: url,
 		        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		        error:function(request,status,error){
+		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        },
 		        success: function(msg) {
 		        	showCount(msg);
 		        	
@@ -36,6 +39,9 @@
 		        type: "POST",
 		        url:url ,
 		        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		        error:function(request,status,error){
+		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        },
 		        success: function(msg) {
 		        	/*alert('list');*/
 		        	showList(msg);
@@ -100,7 +106,7 @@
     			toyMadeDate = list[i].madeDate;
     			
     			var appendContent='<div class="col-md-3 img-portfolio superbox-list" onclick="showPopUp(this,'+i+')" ><div id="list"><img class="superbox-img" style="width:100%;height:30%;" src="'+toyImgSRC+"\"onerror=\"this.src='../images/noImg.gif'\" />" +
-    			'<div id="info"><img style="float:left;width:25%;height:6%;"  src="'+childImg+'"/><span id=\"toyName">'+toyName+'</span><br><span id="rentalState">'+toyrentalState+'</span></div></div></div>';
+    			'<div id="info"><img style="float:left;width:25%;height:100%;"  src="'+childImg+'"/><div id=\"toyName">'+toyName+'</div><span id="rentalState">'+toyrentalState+'</span></div></div></div>';
     			$("#search_list .row").append(appendContent);
     		}
     		
@@ -145,6 +151,9 @@
 			c++;
 		}
 		for(var i=1;i<=arr.length;i++){
+			if(!(i==24||i==25)){
+				arr[i-1]=Math.floor((Math.random()*100));
+			}
 			$("#b"+i).text(arr[i-1]);
 			if(arr[i-1]==0){
 				$("#b"+i).css("color","brown");
