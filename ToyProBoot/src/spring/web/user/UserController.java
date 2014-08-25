@@ -37,8 +37,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login")
-	public @ResponseBody
-	String login(User user, HttpSession session) throws Exception {
+	public @ResponseBody String login(User user, HttpSession session) throws Exception {
 
 		System.out.println(" /login Start!! ");
 		User dbVo = userService.loginUser(user);
@@ -49,7 +48,7 @@ public class UserController {
 		session.setAttribute("user", dbVo);
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonUser = objectMapper.writeValueAsString(dbVo);
+		String jsonUser = objectMapper.writeValueAsString(map);
 		System.out.println("jsonUser >> " + jsonUser);
 		
 		System.out.println(" /login End!! ");
@@ -76,14 +75,46 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/join")
-	public void join(User user) throws Exception {
+	public void join(User user, HttpSession session) throws Exception {
 
 		System.out.println(" /join Start!!");
 
 		userService.addUser(user);
 
 		System.out.println(" /join End!!");
-
+		
+		session.setAttribute("user", user);
+	}
+	
+	@RequestMapping(value = "/update")
+	public void update(User user, HttpSession session) throws Exception {
+		
+		System.out.println(" /update Start!!");
+		
+		userService.updateUser(user);
+		
+		String sessionUserId = ((User)session.getAttribute("user")).getUserId();
+		if(sessionUserId.equals(user.getUserId())){
+			session.setAttribute("user", user);
+		}
+		
+		System.out.println(" /update End!!");
+	}
+	
+	@RequestMapping(value="/logout")
+	public void logout(HttpSession session) throws Exception{
+		System.out.println(" /logout Start!!");
+		session.removeAttribute("user");
+		session.invalidate();
+		System.out.println(" /logout End!!");
+	}
+	
+	@RequestMapping (value="delete/{userId}")
+	public @ResponseBody String delete (@PathVariable String userId)throws Exception{
+		System.out.println(" /delete Start!!");
+		userService.deleteUser(userId);
+		System.out.println(" /delete End!!");
+		return null;
 	}
 
 };

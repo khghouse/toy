@@ -61,9 +61,9 @@
 		WHERE user_id=#{userId}
 	</update>
 	
-	<!-- <delete id="deleteUser" parameterType="user">
+	<delete id="deleteUser" parameterType="user">
 		DELETE user_info 
-		WHERE user_id = #{userId};
-	</delete> -->
+		WHERE user_id = #{userId}
+	</delete>
 	
 </mapper>

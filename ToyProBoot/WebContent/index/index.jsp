@@ -51,7 +51,7 @@
 <!--     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script type="text/javascript" src="../js/map.js"></script>
-    <script type="text/javascript" src="../js/join.js"></script>
+    <script type="text/javascript" src="../js/user.js"></script>
     <script type="text/javascript" src="../js/loginout.js"></script>
     <!-- <script type="text/javascript" src="../js/contact.js"></script> -->
 

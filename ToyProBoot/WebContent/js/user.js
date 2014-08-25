@@ -1,15 +1,6 @@
 	
 function joinEventListener(){
 	
-	//var userId;
-/*	var userPw1;
-	var userPw2;
-	var userName;
-	var tel;
-	var email;
-	var addr;*/
-
-	
 	$('#userId').keyup(function(){
 		
 		userId = $('#userId').val();
@@ -41,13 +32,10 @@ function joinEventListener(){
 					}else{
 						$('#checkId').html(userId+"은(는) 사용중인 아이디 입니다.");
 					}
-					
 				}
-				
 			});//ajax id validation	
 		}//validation length		
 	});//userId
-	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////// PW
 	$('#userPw1').keyup(function(){
@@ -93,6 +81,11 @@ function joinEventListener(){
 	});//userPw1 keyup
 	
 	///////////////////////////////////////////////////////////////////////////// not null validation 
+	var userId;
+	var tel;
+	var email;
+	var addr;
+	
 	$('#tel').keyup(function(){
 		tel = $('#tel').val();
 		if(tel == ''||tel==null)
@@ -111,44 +104,38 @@ function joinEventListener(){
 			$('#addr').attr("placeholder","주소가 비었습니다.");
 	});
 	
-		$('#btn_join').click(function(){
-			if(	userId==''||userId==null||userPw1==''||userPw1==null||userPw2==''||userPw2==null||userName==''||userName==null||
-					tel==''||tel==null||email==''||email==null){
-					alert("id, password, name, tel, email 필수입력칸을 입력 후 다시 눌러주세요 ");
-			}else{
-				var str = $('#joinForm').serialize();
-				
-				$.ajax({
-					url:"/app/user/join",
-					type:"POST",
-					data:str,
-					dataType:"json",
-					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-					beforeSend:function(){
-						
-					},
-					error:function(request,status,error){
-						alert("입력하신 아이디가 중복은 아닌가요?!");
-			        },
-					success:function(){
-						alert("회원가입이 완료되었습니다.");
-						$('#loading').fadeIn(500).delay(1).fadeOut();
-						changeContent('../index/mainContent.jsp');
-					}
-				});//ajax
-			}//not null validation		
-		});//btn_join click
-	
+	///////////////////////////////////////////////////////////////////////////// Click join
+	$('#btn_join').click(function(){
+		if(	userId==''||userId==null||userPw1==''||userPw1==null||userPw2==''||userPw2==null||userName==''||userName==null||
+				tel==''||tel==null||email==''||email==null){
+				alert("id, password, name, tel, email 필수입력칸을 입력 후 다시 눌러주세요. ");
+		}else{
+			var str = $('#joinForm').serialize();
+			
+			$.ajax({
+				url:"/app/user/join",
+				type:"POST",
+				data:str,
+				dataType:"json",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				beforeSend:function(){
+					
+				},
+				error:function(request,status,error){
+					alert("입력하신 값을 확인해주세요.");
+		        },
+				success:function(){
+					alert("회원가입이 완료되었습니다.");
+					$('#loading').fadeIn(500).delay(1).fadeOut();
+					changeContent('../index/mainContent.jsp');
+				}
+			});//ajax
+		}//not null validation		
+	});//btn_join click
 }//joinEventListener();
 
 function updateEventListener(){
-/*	var userPw1;
-	var userPw2;
-	var tel;
-	var email;
-	var addr;*/
-	
-	var email;
+	///////////////////////////////////////////////////////////////////////////// not null validation 
 	$('#userPw1').keyup(function(){
 		
 		userPw1 = $('#userPw1').val();
@@ -208,6 +195,7 @@ function updateEventListener(){
 	});
 	
 	
+	///////////////////////////////////////////////////////////////////////////// Click Update
 	$('#btn_update').click(function(){
 		if(	userPw1==''||userPw1==null||userPw2==''||userPw2==null||
 				tel==''||tel==null||email==''||email==null){
@@ -229,9 +217,31 @@ function updateEventListener(){
 		        },
 				success:function(){
 					alert("update 완료되었습니다.");
-					changeContent("/index/index.jsp");
+					changeContent("../user/updateUser.jsp");
 				}
 			});//ajax
 		}//not null validation
 	});//btn_update click
 }//updateEventListener();
+
+
+function deleteEventListener(){
+	///////////////////////////////////////////////////////////////////////////// Click Update
+	
+	$('#btn_delete').click(function(){
+		var userId = $('#userId').val();
+		$.ajax({
+			url:"/app/user/delete/"+userId,
+			type:"POST",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			error:function(){
+				console.log("delete 실패");
+			},
+			success:function(){
+				$('#myPage').css("display","none");
+				$('#aLogin').css("display","block");
+				changeContent("../index/mainContent.jsp");
+			}
+		});//ajax
+	});//$('#btn_delete').click()
+}//deleteEventListener();
