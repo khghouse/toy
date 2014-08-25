@@ -43,7 +43,7 @@ public class ReservationController
 	}
 
 	@RequestMapping(value="/addReservation/{rentalCode}/{toyCode}")
-	public @ResponseBody String getRentalState(@ModelAttribute Reservation reservation, @ModelAttribute Toy toy, @ModelAttribute RentalShop rentalShop, @PathVariable int rentalCode, @PathVariable String toyCode, HttpSession session) throws Exception
+	public String getRentalState(@ModelAttribute Reservation reservation, @ModelAttribute Toy toy, @ModelAttribute RentalShop rentalShop, @PathVariable int rentalCode, @PathVariable String toyCode, HttpSession session) throws Exception
 	{
 		/*System.out.println("탓나?>");*/
 		System.out.println(reservation);
