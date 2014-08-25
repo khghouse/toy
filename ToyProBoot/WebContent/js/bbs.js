@@ -66,7 +66,7 @@ function bbsList(msg) {
 			/*$("<td>").attr("width","10%").text(list[i].code);*/
 			/*$("<td>").attr("width","40%").attr("align","left").text("&nbsp;&nbsp;").*/
 			
-			var appendContent='	<tr><td width="10%">'+list[i].code+'</td>'
+			var appendContent='	<tr><td width="10%" align="center">'+list[i].code+'</td>'
 								+'<td width="40%" align="left">&nbsp;&nbsp;';
 			
 			//관리자 없으면
@@ -92,12 +92,12 @@ function bbsList(msg) {
 			
 			//첨부파일 조건
 			if(list[i].attachment ==null){
-				appendContent+='<td width="10%"></td>';
+				appendContent+='<td width="10%" align="center"></td>';
 			}else{
-				appendContent+='<td width="10%">'+list[i].attachment+'</td>';
+				appendContent+='<td width="10%" align="center">'+list[i].attachment+'</td>';
 			}
 			
-			appendContent+='<td width="15%">'+list[i].userId.userId+'</td><td width="15%">'+list[i].regDate+'</td><td width="10%">'+list[i].count+'</td></tr>';
+			appendContent+='<td width="15%" align="center">'+list[i].userId.userId+'</td><td width="15%" align="center">'+list[i].regDate+'</td><td width="10%" align="center">'+list[i].count+'</td></tr>';
 			
 			
 			$(".table #bbsList").append(appendContent);
