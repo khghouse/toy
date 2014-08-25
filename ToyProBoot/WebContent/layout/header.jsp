@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-
+    
 <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -53,10 +52,13 @@
                         <a href="#" id="aLogin" onclick="changeContent('../user/login.jsp')">Login</a>
                     </li>
                     <li id="myPage" style="display:none;" class="dropdown">
-                        <a id="aUserId" href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MyPage<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#" onclick="changeContent('../user/updateUser.jsp')">MyPage</a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="changeContent('../user/rentalState.jsp')">RentalState</a>
                             </li>
                             <li>
                                 <a id="aLogout" href="#" onclick="changeContent('../index/mainContent.jsp')">Logout</a>
@@ -78,3 +80,10 @@
         </div>
         <!-- /.container -->
     </nav>
+    
+<script type="text/javascript">
+	/* (function(){
+		alert("already");
+		
+	})(); */
+</script>
