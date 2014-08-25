@@ -98,6 +98,7 @@
     			toyUseAge = list[i].useAge;
     			toyRegion = list[i].region;
     			toyMadeDate = list[i].madeDate;
+    			
     			var appendContent='<div class="col-md-3 img-portfolio superbox-list" onclick="showPopUp(this,'+i+')" ><div id="list"><img class="superbox-img" style="width:100%;height:30%;" src="'+toyImgSRC+"\"onerror=\"this.src='../images/noImg.gif'\" />" +
     			'<div id="info"><img style="float:left;width:25%;height:6%;"  src="'+childImg+'"/><span id=\"toyName">'+toyName+'</span><br><span id="rentalState">'+toyrentalState+'</span></div></div></div>';
     			$("#search_list .row").append(appendContent);
@@ -204,6 +205,7 @@
 	
 	function showPopUp(obj,i){
 		var obj = $(obj);									//.superbox-list
+		
 		var imgsrc= obj.children().children().attr('src');	//superbox-img src
 		
 		var superbox      = $('<div class="superbox-show"></div>');
@@ -217,14 +219,17 @@
 		var popupregion=$('<div class="popupregion">abcdabcd</div>');
 		var popupmadedate=$('<div class="popupmadedate">abcdabcd</div>');
 		var popupimage = $('<div class="popupimage"></div>');
-		var popupbtn = $('<div class="popupbtn"><button class="btn btn-default btn-sm">예약하기</div>');
+		/*var popupbtn = $('<div class="popupbtn"><button class="btn btn-default btn-sm" onclick="reservationFormData(this)">예약하기</div>');*/
 		
+		/*var popupbtn = $('<div class="popupbtn"><button class="btn btn-default btn-sm" onclick="changeContent('+"'reservationFormData()'"+')">예약하기</div>');*/
+		/*changeContent('../reservation/reservationForm.jsp?toyCode=toyCode');*/
+		var popupbtn = $('<div class="popupbtn"><button class="btn btn-default btn-sm" onclick="changeContent('+"'../reservation/reservationForm.jsp?toyCode="+list[i].toyCode+"'"+')">예약하기</div>');
 		
 		superbox.append(superboximg).append(outline).append(popupname).append(popuprentalstate)
 		.append(popupuseage).append(popupbusiness).append(popupregion).append(popupmadedate);
 		superbox.append(popupimage);
-		if(toyrentalState="대출가능"){
-			/*alert("대출가능 ??");*/
+		
+		if(list[i].rentalState=="대출가능      "){
 			superbox.append(popupbtn);
 		}
 		
@@ -238,7 +243,7 @@
 			popupregion.text("제조국 : "+list[i].region);
 			popupmadedate.text("제조일 : "+list[i].madeDate);
 			
-			if(list[i].rentalState="제적"){
+			if(list[i].rentalState=="제적          "){
 				popuprentalstate.text("상태 : 대출중");
 			}else{
 				popuprentalstate.text("상태 : "+list[i].rentalState);
