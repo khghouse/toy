@@ -19,7 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.common.parse.GuroRentalShopParsing;
 import spring.common.parse.GuroToyParsing;
 import spring.domain.Page;
+import spring.domain.RentalShop;
+import spring.domain.Reservation;
 import spring.domain.Search;
+import spring.domain.Toy;
+import spring.domain.User;
 import spring.domain.guro.GuroRentalShop;
 import spring.domain.guro.GuroToy;
 import spring.service.toyproduct.ToyProductService;
@@ -88,5 +92,34 @@ public class ToyProductController
 		String jsonCount = objectMapper.writeValueAsString(a);
 		System.out.println(jsonCount+"jsonCount \n\n");
 		return jsonCount;
+	}
+	
+	@RequestMapping(value="/getToy/{toyCode}")
+	public @ResponseBody String getToy(@PathVariable String toyCode) throws Exception
+	{
+		/*System.out.println("탔나?");*/
+		Toy toy = toyProductService.getToy(toyCode);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonToyData = objectMapper.writeValueAsString(toy);
+//		System.out.println(jsonToyData);
+		
+		return jsonToyData;
+	}
+	
+	@RequestMapping(value="/updateRentalState/{toyCode}/{rentalCode}")
+	public @ResponseBody String updateRentalState(@PathVariable String toyCode, @PathVariable int rentalCode) throws Exception
+	{
+		Toy toy = new Toy();
+		
+		RentalShop rentalShop = new RentalShop();
+		rentalShop.setRentalCode(rentalCode);
+		
+		toy.setToyCode(toyCode);
+		toy.setRentalCode(rentalShop);
+
+		toyProductService.updateRentalState(toy);
+		
+		return null;
 	}
 }
