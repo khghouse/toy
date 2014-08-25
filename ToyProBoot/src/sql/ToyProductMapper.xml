@@ -13,11 +13,12 @@
 <!-- mapper파일 최상위 태그 -->		
 <mapper namespace="ToyProductMapper">
 	
-		<resultMap type="toy" id="toySelectMap">
+	<resultMap type="toy" id="toySelectMap">
+		<result property="toyCode" column="toy_code" jdbcType="VARCHAR"/>
 		<result property="toyName" column="toy_name" jdbcType="VARCHAR"/>
 		<result property="rentalState" column="rental_state" jdbcType="VARCHAR"/>
 		<result property="toyImg" column="toy_img" jdbcType="VARCHAR"/>
-		<result property="rentalCode.rentalName" column="rental_name" jdbcType="VARCHAR"/>
+		<result property="rentalCode.rentalCode" column="rental_code" jdbcType="VARCHAR"/>
 		<result property="business" column="business" jdbcType="VARCHAR"/>
 		<result property="useAge" column="use_age" jdbcType="VARCHAR"/>
 		<result property="region" column="region" jdbcType="VARCHAR"/>
@@ -26,8 +27,8 @@
 	</resultMap>
 	
 	<sql id="sqlToyList">
-		SELECT toy_name, rental_state, toy_img, rental_name, age_subject,use_age,business,region,get_date,made_date
-		FROM (SELECT t.toy_name, t.rental_state, t.toy_img, r.rental_name, t.category_code,t.use_age,t.business,t.region,t.get_date,t.made_date,
+		SELECT toy_code, toy_name, rental_state, toy_img, rental_name, age_subject,use_age,business,region,get_date,made_date
+		FROM (SELECT t.toy_code, t.toy_name, t.rental_state, t.toy_img, r.rental_name, t.category_code,t.use_age,t.business,t.region,t.get_date,t.made_date,
 															 decode(t.use_age, '3개월이상', '0~1세'
                                                                                                 ,'6개월이상', '0~1세'
                                                                                                 ,'10개월이상', '0~1세'
@@ -146,8 +147,8 @@
 	 </select>
 	
 	<select id="getToyList" parameterType="search" resultMap="toySelectMap">
-		SELECT toy_name, rental_state, toy_img, rental_name,use_age,business,region, get_date, made_date
-		FROM(SELECT toy_name, rental_state, toy_img, rental_name,use_age,business,region,get_date,made_date, ROWNUM AS row_seq
+		SELECT toy_code, toy_name, rental_state, toy_img, rental_name,use_age,business,region, get_date, made_date
+		FROM(SELECT toy_code, toy_name, rental_state, toy_img, rental_name,use_age,business,region,get_date,made_date, ROWNUM AS row_seq
 						FROM(<include refid="sqlToyList"/>)
 						WHERE ROWNUM &lt;= ${currentPage * pageSize} )
 		WHERE row_seq BETWEEN ${(currentPage - 1) * pageSize + 1} AND ${currentPage * pageSize}
@@ -207,5 +208,44 @@
 		SELECT toy_code
 		FROM toy_info
 	</select>
+	
+	<select id="getToy" parameterType="string" resultMap="toySelectMap">
+		SELECT toy_code, toy_name, rental_state, toy_img, rental_name, age_subject,use_age,business,region,get_date,made_date, rental_code
+		FROM (SELECT t.toy_code, t.toy_name, t.rental_state, t.toy_img, r.rental_name, t.category_code,t.use_age,t.business,t.region,t.get_date,t.made_date, t.rental_code,
+															 decode(t.use_age, '3개월이상', '0~1세'
+                                                                                                ,'6개월이상', '0~1세'
+                                                                                                ,'10개월이상', '0~1세'
+                                                                                                ,'12개월이상', '1세~2세'
+                                                                                                ,'12개월~36개월', '1세~2세'
+                                                                                                ,'12개월~3세이상', '1세~2세'
+                                                                                                ,'12개월~4세 이상', '1세~2세'
+                                                                                                ,'1세이상', '1세~2세'
+                                                                                                ,'1세부터', '1세~2세'
+                                                                                                ,'1세~4세', '1세~2세'
+                                                                                                ,'18개월-48개월까지', '1세~2세'
+                                                                                                ,'13개월~36개월', '1세~2세'
+                                                                                                ,'만2세이상. 30kg이내', '1세~2세'
+                                                                                                ,'25개월이상', '2세~3세'
+                                                                                                ,'만3세이상', '2세~3세'
+                                                                                                ,'36개월이상', '3세~4세'
+                                                                                                ,'37개월이상', '3세~4세'
+                                                                                                ,'37개월이상, 40KG미만 사용', '3세~4세'
+                                                                                                ,'3세이상', '3세~4세'
+                                                                                                ,'3세이상~7세미만', '3세~4세'
+                                                                                                ,'만 4세 이상 사용 / 최대하중 35kg이하', '3세~4세'
+                                                                                                ,'4세이상', '4세~5세'
+                                                                                                ,'4세이상. 25kg미만', '4세~5세'
+                                                                                                ,'5세이상', '5세이상'
+                                                                                                        ,'전체연령') as age_subject
+                        FROM toy_info t, rental_shop r
+             			WHERE t.rental_code = r.rental_code)
+		WHERE toy_code = #{value}
+	</select>
+	
+	<update id="updateRentalState" parameterType="toy">
+		UPDATE toy_info
+		SET rental_state = '제적          '
+		WHERE toy_code = #{toyCode} AND rental_code = #{rentalCode.rentalCode}
+	</update>
 </mapper>
 	
