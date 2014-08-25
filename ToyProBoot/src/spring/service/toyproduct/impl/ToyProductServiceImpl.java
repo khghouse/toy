@@ -72,4 +72,16 @@ public class ToyProductServiceImpl implements ToyProductService
 			// TODO Auto-generated method stub
 			return toyProductDao.getToyCount(search);
 		}
+		
+		@Override
+		public Toy getToy(String toyCode) throws Exception {
+			// TODO Auto-generated method stub
+			return toyProductDao.getToy(toyCode);
+		}
+
+		@Override
+		public void updateRentalState(Toy toy) throws Exception {
+			// TODO Auto-generated method stub
+			toyProductDao.updateRentalState(toy);
+		}
 }

@@ -20,4 +20,8 @@ public interface ToyProductService
 	public List<String> getToyId() throws Exception;
 
 	public int[] getToyCount(Search search) throws Exception;
+	
+	public Toy getToy(String toyCode) throws Exception;
+	
+	public void updateRentalState(Toy toy) throws Exception;
 }

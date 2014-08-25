@@ -127,4 +127,16 @@ public class ToyProductDaoImpl implements ToyProductDao
 		}
 		return toyCount;
 	}
+	
+	@Override
+	public Toy getToy(String toyCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ToyProductMapper.getToy", toyCode);
+	}
+
+	@Override
+	public void updateRentalState(Toy toy) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("ToyProductMapper.updateRentalState", toy);
+	}
 }
