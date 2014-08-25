@@ -52,7 +52,7 @@
                         <a href="#" id="aLogin" onclick="changeContent('../user/login.jsp')">Login</a>
                     </li>
                     <li id="myPage" style="display:none;" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MyPage<b class="caret"></b></a>
+                        <a id="aUserId" href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#" onclick="changeContent('../user/updateUser.jsp')">MyPage</a>
