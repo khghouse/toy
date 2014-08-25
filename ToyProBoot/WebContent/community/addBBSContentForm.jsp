@@ -38,7 +38,7 @@
 	  <div class="form-group">
 	   <label for="inputPassword1" class="col-lg-2 control-label">내용</label>
 	    <div class="col-lg-10">
-	  	<textarea class="form-control" rows="3" name="content" id="contentId"></textarea>
+	  	<textarea class="form-control" rows="3" name="content" id="contentId" placeholder="내용을 입력해주세요"></textarea>
 	  	</div>
 	  </div>
 	  
