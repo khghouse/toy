@@ -152,7 +152,7 @@
 		}
 		for(var i=1;i<=arr.length;i++){
 			if(!(i==24||i==25)){
-				arr[i-1]=Math.floor((Math.random()*100));
+				arr[i-1]=Math.floor((Math.random()*30));
 			}
 			$("#b"+i).text(arr[i-1]);
 			if(arr[i-1]==0){
