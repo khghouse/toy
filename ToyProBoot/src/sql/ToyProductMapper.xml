@@ -84,8 +84,8 @@
 	</sql>
 	
 		<sql id="sqlToyList2">
-		SELECT toy_name, rental_state, toy_img, rental_name, age_subject,use_age,business,region,get_date,made_date
-		FROM (SELECT t.toy_name, t.rental_state, t.toy_img, r.rental_name, t.category_code,t.use_age,t.business,t.region,t.get_date,t.made_date,
+		SELECT toy_code,toy_name, rental_state, toy_img, rental_name, age_subject,use_age,business,region,get_date,made_date
+		FROM (SELECT t.toy_code,t.toy_name, t.rental_state, t.toy_img, r.rental_name, t.category_code,t.use_age,t.business,t.region,t.get_date,t.made_date,
 															 decode(t.use_age, '3개월이상', '0~1세'
                                                                                                 ,'6개월이상', '0~1세'
                                                                                                 ,'10개월이상', '0~1세'
@@ -155,8 +155,8 @@
 	</select>
 	
 	<select id="getToyList2" parameterType="search" resultMap="toySelectMap">
-		SELECT toy_name, rental_state, toy_img, rental_name,use_age,business,region, get_date, made_date
-		FROM(SELECT toy_name, rental_state, toy_img, rental_name,use_age,business,region,get_date,made_date, ROWNUM AS row_seq
+		SELECT toy_code,toy_name, rental_state, toy_img, rental_name,use_age,business,region, get_date, made_date
+		FROM(SELECT toy_code,toy_name, rental_state, toy_img, rental_name,use_age,business,region,get_date,made_date, ROWNUM AS row_seq
 						FROM(<include refid="sqlToyList2"/>)
 						WHERE ROWNUM &lt;= ${currentPage * pageSize} )
 		WHERE row_seq BETWEEN ${(currentPage - 1) * pageSize + 1} AND ${currentPage * pageSize}

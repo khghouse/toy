@@ -23,7 +23,10 @@
                     <li>
                         <a href="#" onclick="changeContent('../contact/contact.jsp')">Contact</a>
                     </li>
-                    <li class="dropdown">
+                    <li>
+                        <a href="#" onclick="changeContent('../search/toySearch.jsp')">Search</a>
+                    </li>
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -36,7 +39,7 @@
                                 <a href="#" onclick="changeContent('../search/bestToyList.jsp')">Best Toy</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Community <b class="caret"></b></a>
                         <ul class="dropdown-menu">
