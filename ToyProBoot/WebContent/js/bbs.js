@@ -161,6 +161,15 @@ function formAddcontent() {
 	var content = document.getElementById("contentId").value;
 	var attachment = document.getElementById("bbs_attachment").value; 
 	
+	if(subject==''){
+		alert("제목을 입력해주세요.");
+		return false;
+	}
+	
+	if(content==''){
+		alert("내용을 입력해주세요.");
+		return false
+	}
 	
 	if(attachment == ''){
 		attachment = "empty";
@@ -198,6 +207,14 @@ function formAddRecontent() {
 	
 	var jsonValue = '{"code" : "'+code+'","subject":"'+subject+'","content":"'+content+'","attachment":"'+attachment+'","root":"'+root+'","groupId":"'+groupId+'","groupStep":"'+groupStep+'","groupTab":"'+groupTab+'"}';
 	
+	if(subject==''){
+		alert("제목을 입력해주세요.");
+		return false;
+	}
+	if(content==''){
+		alert("내용을 입력해주세요.");
+		return false;
+	}
 	if(attachment == ''){
 		attachment = "empty";
 	}
@@ -254,6 +271,11 @@ function formUpdate() {
 //reply insert 할때 들어가기(bbsContent)
 function addReply() {
 	var replyContent = document.getElementById("reply_textarea").value;
+	
+	if(replyContent ==''){
+		alert("댓글을 입력해주세요.");
+		return false;
+	}
 	var code = document.getElementById("codeId").value;
 	/*var userId = document.getElementById("userId").value;*/
 	/*var jsonValue = '{"code" : "'+code+'","replyContent":"'+replyContent+'"}';
