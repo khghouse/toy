@@ -50,6 +50,38 @@
 		});
 	}
 	
+	function keywordSearch()
+	{
+		var url="/app/showCount";
+		url=loadPage(url);
+	    $.ajax({
+	        type: "POST",
+	        url: url,
+	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        error:function(request,status,error){
+	            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        },
+	        success: function(msg) {
+	        	showCount(msg);
+	        	
+	        
+	            
+	        }
+	    });
+	    url="/app/showList";
+	    url=loadPage(url);
+	    url=url+"/null/null";
+	    /*alert('222');*/
+	    $.ajax({
+	        type: "POST",
+	        url:url ,
+	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        success: function(msg) {
+	        	/*alert('list');*/
+	        	showList(msg);
+	        }
+	    });
+	}
 	
 	function loadPage(strPage)
 	{
