@@ -95,7 +95,7 @@
         			</select>
         		</div>
   				<div class="col-md-4">
-					<input type="text" class="form-control" name="searchKeyword" id="keyword" placeholder="장난감 명" onkeydown="keywordSearch()">
+					<input type="text" class="form-control" name="searchKeyword" id="keyword" placeholder="장난감 명" onkeyup="keywordSearch()">
 					<!-- <button type="button" class="btn btn-primary" data="/app/show" id="btnSearch">검 색</button> -->
   				</div>
 
