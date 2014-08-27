@@ -131,15 +131,21 @@
     				toyName=toyName+" ...";
     			} 
     			toyrentalState=((list[i].rentalState=="대출가능      ")?"대출가능":"대출중");
-    			
     			toyBusiness = list[i].business;
     			toyUseAge = list[i].useAge;
     			toyRegion = list[i].region;
     			toyMadeDate = list[i].madeDate;
+    			var rt;
+    			if(toyrentalState!="대출가능"){
+    				rt='<span id="rentalState" style="color:red;">'+toyrentalState+'</span>';	
+    			}else{
+    				rt='<span id="rentalState" style="color:blue;">'+toyrentalState+'</span>';
+    			}
     			
     			var appendContent='<div class="col-md-3 img-portfolio superbox-list" onclick="showPopUp(this,'+i+')" ><div id="list"><img class="superbox-img" style="width:100%;height:30%;" src="'+toyImgSRC+"\"onerror=\"this.src='../images/noImg.gif'\" />" +
-    			'<div id="info"><img style="float:left;width:25%;height:100%;"  src="'+childImg+'"/><div id=\"toyName">'+toyName+'</div><span id="rentalState">'+toyrentalState+'</span></div></div></div>';
+    			'<div id="info"><img style="float:left;width:25%;height:100%;"  src="'+childImg+'"/><div id=\"toyName">'+toyName+'</div>'+rt+'</div></div></div>';
     			$("#search_list .row").append(appendContent);
+    			
     		}
     		
     		pageNavigator(page,search.shopCode);

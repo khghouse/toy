@@ -105,7 +105,7 @@ footer {
 #rentalState{
 	font-size:10pt;
 	font-weight: 400;
-	color:#2F9D27;
+	font-weight: bold;
 }
 #list{
 	margin:2%;
