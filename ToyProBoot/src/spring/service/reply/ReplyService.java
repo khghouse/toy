@@ -12,6 +12,8 @@ public interface ReplyService {
 	
 	public int deleteReply(int replyCode) throws Exception;
 	
+	public int deleteBBSReply(int code) throws Exception;
+	
 	public int updateReply(Reply reply) throws Exception;
 
 }

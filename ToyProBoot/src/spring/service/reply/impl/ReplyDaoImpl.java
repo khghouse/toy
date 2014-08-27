@@ -45,4 +45,10 @@ public class ReplyDaoImpl implements ReplyDao {
 		return sqlSession.update("ReplyMapper.updateReply", reply);
 	}
 
+	@Override
+	public int deleteBBSReply(int code) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("ReplyMapper.deleteBBSReply", code);
+	}
+
 }

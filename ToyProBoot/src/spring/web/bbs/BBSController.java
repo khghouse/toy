@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import spring.domain.BBS;
 import spring.domain.Page;
+import spring.domain.Reply;
 import spring.domain.Search;
 import spring.domain.User;
 import spring.service.bbs.BBSService;
@@ -95,7 +96,6 @@ public class BBSController{
 	
 	@RequestMapping(value="/getBBSContent/{code}")
 	public String getBBSContent(@PathVariable int code, Model model) throws Exception{
-
 		model.addAttribute("bbs", bbsService.getBBSContent(code));
 		model.addAttribute("reply", replyService.getReply(code));
 		return "/community/bbsContent.jsp";
@@ -145,10 +145,12 @@ public class BBSController{
 	
 	@RequestMapping(value="/deleteBBSContent/{code}/{depth}")
 	public String deleteBBSContent(@PathVariable int code, @PathVariable int depth, Model model) throws Exception{
-		
+		System.out.println("컨트롤은 탔니?");
 		if(depth==0){
+			replyService.deleteBBSReply(code);
 			model.addAttribute("bbs", bbsService.deleteBBSContent(code));
 		}else if(depth!=0){
+			replyService.deleteBBSReply(code);
 			model.addAttribute("bbs", bbsService.updateSubject(code));
 		}
 		

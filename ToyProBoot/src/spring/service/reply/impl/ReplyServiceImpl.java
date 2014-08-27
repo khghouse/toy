@@ -46,6 +46,12 @@ public class ReplyServiceImpl implements ReplyService {
 		// TODO Auto-generated method stub
 		return replyDao.updateReply(reply);
 	}
+
+	@Override
+	public int deleteBBSReply(int code) throws Exception {
+		// TODO Auto-generated method stub
+		return replyDao.deleteBBSReply(code);
+	}
 	
 
 }

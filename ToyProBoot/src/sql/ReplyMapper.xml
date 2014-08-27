@@ -42,6 +42,11 @@
 		DELETE FROM reply 
 		WHERE reply_code=#{value} 
 	</delete>
+	
+	<delete id="deleteBBSReply" parameterType="int">
+		DELETE FROM reply 
+		WHERE code=#{value} 
+	</delete>
 
 	<update id="updateReply" parameterType="reply">
 		UPDATE reply SET  reply_content=#{replyContent}
